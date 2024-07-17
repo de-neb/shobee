@@ -14,7 +14,7 @@
                 <v-list>
                     <v-list-item class="px-3" v-for="category in home.categories" :key="category.id"
                         :value="category.id">
-                        <v-list-item-title>
+                        <v-list-item-title class="text-capitalize">
                             {{ category.name }}
                         </v-list-item-title>
                     </v-list-item>
