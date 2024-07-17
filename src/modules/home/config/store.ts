@@ -8,7 +8,7 @@ export const useHomeStore = defineStore("home", {
     }),
 
     actions: {
-        async loadAllCategories(limit: number | undefined) {
+        async loadAllCategories(limit: number = 5) {
             try {
                 const { data } = await service.getAllCategories(limit);
                 this.categories = data;
