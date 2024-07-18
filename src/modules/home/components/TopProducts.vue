@@ -1,13 +1,7 @@
 <template>
-
     <template v-if="productStore.loading">
         <v-row class="mt-10 mb-5">
             <v-skeleton-loader type="heading" width="200"></v-skeleton-loader>
-        </v-row>
-        <v-row justify="space-between" align="center">
-            <v-col md="2" alig-self="center" v-for="product in topProducts" :key="product.id + '_skeleton'">
-                <v-skeleton-loader :elevation="2" type="card, text@3"></v-skeleton-loader>
-            </v-col>
         </v-row>
     </template>
 
@@ -18,7 +12,7 @@
 
         <v-row justify="start" align="center">
             <v-col md="3" alig-self="center" v-for="product in topProducts" :key="product.id">
-                <ProductCard :product="product" />
+                <ProductCard :product="product" :loading="productStore.loading" />
             </v-col>
         </v-row>
     </template>
