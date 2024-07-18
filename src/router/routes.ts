@@ -19,7 +19,8 @@ export default [
         component: () => import("@/layouts/Common.vue"),
         children: [
             {
-                path: "",
+                path: ":id",
+                name: "Product",
                 component: () =>
                     import("@/modules/products/views/Products.vue"),
                 meta: {

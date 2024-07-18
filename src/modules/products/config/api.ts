@@ -12,6 +12,13 @@ export default {
         });
     },
 
+    getProductById(id: number) {
+        return serviceHelper({
+            url: `products/${id}`,
+            method: "get",
+        });
+    },
+
     getProductsByCategory(categoryId: number) {
         return serviceHelper({
             url: "products",
