@@ -1,6 +1,6 @@
 <template>
-    <v-app-bar height="100" :class="background">
-        <v-toolbar height="100" class="bg-transparent">
+    <v-app-bar app height="100" class="position-fixed" :class="background">
+        <v-toolbar height="100" class="bg-transparent ">
             <v-btn icon>
                 <v-icon>mdi-magnify</v-icon>
             </v-btn>
@@ -52,6 +52,7 @@ defineProps({
 })
 
 const home = useHomeStore()
+
 
 onMounted(() => {
     home.loadAllCategories()

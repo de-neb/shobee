@@ -16,7 +16,7 @@ const light: ThemeDefinition = {
     colors: {
         background: "#FFFFFF",
         surface: "#FFFFFF",
-        primary: "#92C7CF",
+        primary: "#82d8f3",
         "primary-darken-1": "#3700B3",
         secondary: "#AAD7D9",
         "secondary-darken-1": "#018786",
