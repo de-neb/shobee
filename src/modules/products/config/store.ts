@@ -6,7 +6,6 @@ import { DEFAULT_CURRENCY } from "./contants";
 export const useProductStore = defineStore("product", {
     state: () => ({
         products: [],
-        currency: DEFAULT_CURRENCY,
         loading: false,
     }),
 
@@ -16,10 +15,15 @@ export const useProductStore = defineStore("product", {
                 this.loading = true;
                 const { data } = await service.getProducts(offset, limit);
 
-                this.products = data;
+                this.products = data.map((row) => ({
+                    ...row,
+                    currency: DEFAULT_CURRENCY,
+                }));
 
-                return data;
-            } catch (error) {}
+                return this.products;
+            } finally {
+                this.loading = false;
+            }
         },
     },
 });
