@@ -11,7 +11,7 @@
         </v-row>
 
         <v-row justify="start" align="center">
-            <v-col md="3" alig-self="center" v-for="product in topProducts" :key="product.id">
+            <v-col md="3" lg="2" alig-self="center" v-for="product in topProducts" :key="product.id">
                 <ProductCard :product="product" :loading="productStore.loading" />
             </v-col>
         </v-row>

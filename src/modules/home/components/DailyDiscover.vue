@@ -6,7 +6,7 @@
     <v-infinite-scroll @load="onLoad" width="100%" class="overflow-hidden">
         <v-row justify="start" align="center">
             <template v-for="(product, index) in infiniteProducts" :key="product.id">
-                <v-col md="3" alig-self="center">
+                <v-col md="3" xl="2" alig-self="center">
                     <ProductCard :product="product" :loading="infiniteLoading" />
                 </v-col>
             </template>
