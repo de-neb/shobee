@@ -1,48 +1,59 @@
 <template>
-    <v-app-bar app height="100" class="position-fixed" :class="background">
-        <v-toolbar height="100" class="bg-transparent ">
-            <v-btn icon>
-                <v-icon>mdi-magnify</v-icon>
-            </v-btn>
+    <v-app-bar border extended extension-height="50" class="bg-secondary border-white">
+        <v-toolbar class="bg-transparent">
+            <v-img max-width="180" class="mx-10 cursor-pointer" contain src="../assets/logo.png"
+                @click="navigationHelper.to('home')">
+            </v-img>
 
-            <v-menu open-on-hover>
-                <template #activator="{ props }">
-                    <v-btn height="100%" value="one" v-bind="props">Categories <v-icon
-                            icon="mdi-chevron-down"></v-icon></v-btn>
-                </template>
-
-                <v-list>
-                    <v-list-item class="px-3" v-for="category in home.categories" :key="category.id"
-                        :value="category.id">
-                        <v-list-item-title class="text-capitalize">
-                            {{ category.name }}
-                        </v-list-item-title>
-                    </v-list-item>
-                </v-list>
-            </v-menu>
-
-            <v-btn height="100%" value="two" tag="a" href="#topProducts">
-                Top Products
-            </v-btn>
-
-            <v-btn height="100%" value="two" tag="a" href="#dailyDiscover">
-                Daily Discover
-            </v-btn>
+            <v-text-field class="bg-white rounded-lg ml-5" density="comfortable" variant="flat" hide-details
+                prepend-inner-icon="mdi-magnify" placeholder="Search a product" max-width="350"></v-text-field>
 
             <v-spacer></v-spacer>
 
-            <v-toolbar-title class="text-center ml-auto">Shobee</v-toolbar-title>
+            <div class="mx-10">P1000
 
-            <v-spacer></v-spacer>
-
-            <span>P1000<v-btn icon="mdi-cart"></v-btn></span>
+                <v-btn class="text-none" stacked>
+                    <v-badge color="info" content="0">
+                        <v-icon>mdi-cart</v-icon>
+                    </v-badge>
+                </v-btn>
+            </div>
         </v-toolbar>
+
+        <template #extension>
+            <v-sheet border="primary md" width="100%" height="100%" class="px-10">
+                <v-menu open-on-hover>
+                    <template #activator="{ props }">
+                        <v-btn height="100%" value="one" v-bind="props">Categories <v-icon
+                                icon="mdi-chevron-down"></v-icon></v-btn>
+                    </template>
+
+                    <v-list>
+                        <v-list-item class="px-3" v-for="category in home.categories" :key="category.id"
+                            :value="category.id">
+                            <v-list-item-title class="text-capitalize">
+                                {{ category.name }}
+                            </v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+
+                <v-btn height="100%" value="two" tag="a" href="#topProducts">
+                    Top Products
+                </v-btn>
+
+                <v-btn height="100%" value="two" tag="a" href="#dailyDiscover">
+                    Daily Discover
+                </v-btn>
+            </v-sheet>
+        </template>
     </v-app-bar>
 </template>
 
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { useHomeStore } from '@/modules/home/config/store';
+import navigationHelper from '@/helpers/navigationHelper';
 
 defineProps({
     background: {
