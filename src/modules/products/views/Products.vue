@@ -162,7 +162,9 @@
         </v-row>
 
         <!-- related products -->
-
+        <v-row justify="center">
+            <ProductRelated :category-id="categoryId" />
+        </v-row>
     </v-container>
 
 </template>
@@ -172,11 +174,14 @@ import { useProductStore } from '../config/store';
 import { BREADCRUMB_ITEMS } from '../config/contants';
 import helper from '@/modules/home/config/helper'
 import router from '@/router'
+import ProductRelated from '../components/ProductRelated.vue'
 
 const productStore = useProductStore()
 
 const previewImage = ref('')
 const activePreviewImageIndex = ref(0)
+
+const categoryId = computed(() => productStore.viewingProduct?.category?.id)
 
 const breadCrumbItems = computed(() => [...BREADCRUMB_ITEMS, {
     title: productStore.viewingProduct.title,

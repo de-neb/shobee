@@ -11,10 +11,10 @@ export const useProductStore = defineStore("product", {
     }),
 
     actions: {
-        async getProducts(offset: number = 0, limit: number = 100) {
+        async getProducts(params: any) {
             try {
                 this.loading = true;
-                const { data } = await service.getProducts(offset, limit);
+                const { data } = await service.getProducts(params);
 
                 this.products = data.map((row) => ({
                     ...row,
@@ -39,6 +39,19 @@ export const useProductStore = defineStore("product", {
             } finally {
                 this.loading = false;
             }
+        },
+
+        async getProductsByCategory(categoryId: string | number) {
+            const { data } = await service.getProducts({
+                categoryId,
+            });
+
+            const relatedProducts = data.map((row) => ({
+                ...row,
+                currency: DEFAULT_CURRENCY,
+            }));
+
+            return relatedProducts;
         },
     },
 });
