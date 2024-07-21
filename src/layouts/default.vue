@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-app>
     <AppBar background="bg-primary" />
     <v-sheet width="95%" class="mx-auto pt-15">
       <div class="pt-15 mt-5">
@@ -19,10 +19,10 @@
         </v-carousel-item>
       </v-carousel>
     </v-sheet>
-  </v-layout>
-  <v-main class="d-flex h-100 w-100" v-scroll="app.onScroll">
-    <router-view></router-view>
-  </v-main>
+    <v-main class="d-flex h-100 w-100">
+      <router-view></router-view>
+    </v-main>
+  </v-app>
   <Snackbar />
 </template>
 

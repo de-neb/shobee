@@ -1,10 +1,10 @@
 <template>
-    <v-layout height="100%">
+    <v-app height="100%">
         <AppBar background="bg-secondary" />
         <v-main class="d-flex align-center justify-center h-100 w-100">
             <router-view></router-view>
         </v-main>
-    </v-layout>
+    </v-app>
     <Snackbar />
 </template>
 
