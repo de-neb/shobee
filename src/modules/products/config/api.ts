@@ -1,14 +1,11 @@
 import serviceHelper from "@/helpers/serviceHelper";
 
 export default {
-    getProducts(offset: number = 5, limit: number) {
+    getProducts(params: Object = {}) {
         return serviceHelper({
             url: "products",
             method: "get",
-            params: {
-                offset,
-                limit,
-            },
+            params,
         });
     },
 
