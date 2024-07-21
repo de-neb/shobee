@@ -3,11 +3,28 @@
         <h2>Daily Discover</h2>
     </v-row>
 
-    <v-infinite-scroll @load="onLoad" width="100%" class="overflow-hidden">
-        <v-row justify="start" align="center">
-            <template v-for="(product, index) in infiniteProducts" :key="product.id">
-                <v-col md="3" xl="2" alig-self="center">
-                    <ProductCard :product="product" :loading="infiniteLoading" />
+    <v-infinite-scroll
+        @load="onLoad"
+        width="100%"
+        class="overflow-hidden"
+    >
+        <v-row
+            justify="start"
+            align="center"
+        >
+            <template
+                v-for="(product, index) in infiniteProducts"
+                :key="product.id"
+            >
+                <v-col
+                    md="3"
+                    xl="2"
+                    alig-self="center"
+                >
+                    <ProductCard
+                        :product="product"
+                        :loading="infiniteLoading"
+                    />
                 </v-col>
             </template>
         </v-row>
@@ -25,7 +42,10 @@ const offset = ref(10)
 const infiniteLoading = ref(false)
 const onLoad = async ({ done }) => {
     infiniteLoading.value = true
-    const data = await productStore.getProducts(offset.value, 10)
+    const data = await productStore.getProducts({
+        offset: offset.value,
+        limit: 10
+    })
     infiniteProducts.value.push(...data)
     if (data.length <= 0) {
         done('empty')
@@ -38,7 +58,10 @@ const onLoad = async ({ done }) => {
 }
 
 onMounted(async () => {
-    infiniteProducts.value = await productStore.getProducts(offset.value, 10)
+    infiniteProducts.value = await productStore.getProducts({
+        offset: offset.value,
+        limit: 10
+    })
 });
 </script>
 
