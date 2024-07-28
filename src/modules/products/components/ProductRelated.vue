@@ -1,5 +1,30 @@
 <template>
     <v-sheet
+        v-if="isLoading"
+        class="pa-10"
+        width="100%"
+    >
+        <v-row>
+            <v-skeleton-loader
+                type="heading"
+                width="300"
+            ></v-skeleton-loader>
+        </v-row>
+        <v-row
+            justify="space-between"
+            class="flex-nowrap"
+        >
+            <v-skeleton-loader
+                v-for="card in 5"
+                :key="card"
+                type="card"
+                width="200"
+            ></v-skeleton-loader>
+        </v-row>
+    </v-sheet>
+
+    <v-sheet
+        v-else
         class="pa-10"
         width="100%"
     >
@@ -20,7 +45,7 @@
                         >
                             <ProductCard
                                 :product="product.raw"
-                                :loading="infiniteLoading"
+                                :loading="isLoading"
                             />
                         </v-col>
                     </v-row>
@@ -67,10 +92,16 @@ const props = defineProps({
 const productStore = useProductStore()
 
 const relatedProducts = ref([])
-const infiniteLoading = ref(false)
+const isLoading = ref(false)
 
-onMounted(async () => {
+const initRelatedProducts = async () => {
+    isLoading.value = true
     relatedProducts.value = await productStore.getProductsByCategory(props.categoryId)
+    isLoading.value = false
+}
+
+onMounted(() => {
+    initRelatedProducts()
 });
 
 </script>
