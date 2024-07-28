@@ -1,17 +1,39 @@
 <template>
   <v-app>
     <AppBar background="bg-primary" />
-    <v-sheet width="95%" class="mx-auto pt-15">
+    <v-sheet
+      width="95%"
+      class="mx-auto pt-15"
+    >
       <div class="pt-15 mt-5">
       </div>
-      <v-carousel height="500" class="rounded-xl" show-arrows="hover" cycle hide-delimiter-background>
-        <v-carousel-item position="relative" v-for="category in categories" :key="category.id">
+      <v-carousel
+        height="500"
+        class="rounded-xl"
+        show-arrows="hover"
+        cycle
+        hide-delimiter-background
+      >
+        <v-carousel-item
+          position="relative"
+          v-for="category in categories"
+          :key="category.id"
+        >
           <v-card width="100%">
-            <v-img cover class="border-5" :src="miscHelper.getImageSrc(`${category.title}.jpeg`, 'banner')">
+            <v-img
+              cover
+              class="border-5"
+              :src="miscHelper.getImageSrc(`${category.title}.jpeg`, 'banner')"
+            >
               <v-card-title class="mt-15 pt-15 ml-15">
                 <h1 class="text-white text-shadow text-h1 font-weight-black"> {{ category.title }}</h1>
-                <v-btn size="x-large" width="250" variant="flat" color="primary"
-                  class="mt-10 text-h4 font-weight-black p-10">Shop
+                <v-btn
+                  size="x-large"
+                  width="250"
+                  variant="flat"
+                  color="primary"
+                  class="mt-10 text-h4 font-weight-black p-10"
+                >Shop
                   Now</v-btn>
               </v-card-title>
             </v-img>
@@ -22,6 +44,7 @@
     <v-main class="d-flex h-100 w-100">
       <router-view></router-view>
     </v-main>
+    <AppFooter />
   </v-app>
   <Snackbar />
 </template>
