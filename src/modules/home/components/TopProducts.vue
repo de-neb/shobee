@@ -1,7 +1,10 @@
 <template>
     <template v-if="productStore.loading">
         <v-row class="mt-10 mb-5">
-            <v-skeleton-loader type="heading" width="200"></v-skeleton-loader>
+            <v-skeleton-loader
+                type="heading"
+                width="200"
+            ></v-skeleton-loader>
         </v-row>
     </template>
 
@@ -10,9 +13,21 @@
             <h2>Top Products</h2>
         </v-row>
 
-        <v-row justify="start" align="center">
-            <v-col md="3" lg="2" alig-self="center" v-for="product in topProducts" :key="product.id">
-                <ProductCard :product="product" :loading="productStore.loading" />
+        <v-row
+            justify="start"
+            align="center"
+        >
+            <v-col
+                md="4"
+                lg="3"
+                alig-self="center"
+                v-for="product in topProducts"
+                :key="product.id"
+            >
+                <ProductCard
+                    :product="product"
+                    :loading="productStore.loading"
+                />
             </v-col>
         </v-row>
     </template>
@@ -28,8 +43,11 @@ const productStore = useProductStore();
 const topProducts = ref([])
 
 const getRandomTopProducts = async () => {
-    const randomOffset = helper.generateRandomNumber(10, 30)
-    topProducts.value = await productStore.getProducts(randomOffset, 8)
+    const randomOffset = helper.generateRandomNumber(10, 20)
+    topProducts.value = await productStore.getProducts({
+        offset: randomOffset,
+        limit: 8
+    })
 }
 
 onMounted(async () => {
