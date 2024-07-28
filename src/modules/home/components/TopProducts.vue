@@ -1,6 +1,6 @@
 <template>
     <template v-if="productStore.loading">
-        <v-row class="mt-10 mb-5">
+        <v-row class="mt-5 mb-5">
             <v-skeleton-loader
                 type="heading"
                 width="200"
@@ -9,7 +9,7 @@
     </template>
 
     <template v-else>
-        <v-row class="mt-10 mb-5">
+        <v-row class="mt-5 mb-5">
             <h2>Top Products</h2>
         </v-row>
 
