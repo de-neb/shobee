@@ -1,12 +1,38 @@
 <template>
-    <v-skeleton-loader v-if="loading" :elevation="2" type="card, text@3"></v-skeleton-loader>
-    <v-hover v-else v-slot="{ isHovering, props }">
-        <v-card hover width="250" min-height="350" elevation="2" class="mx-auto" v-bind="props"
-            @click="navigateToProduct(product.id)">
-            <v-img contain :src="helper.getImageUrl(product.images)">
+    <v-skeleton-loader
+        v-if="loading"
+        :elevation="2"
+        type="card, text@3"
+    ></v-skeleton-loader>
+    <v-hover
+        v-else
+        v-slot="{ isHovering, props }"
+    >
+        <v-card
+            hover
+            width="250"
+            min-height="350"
+            elevation="2"
+            class="mx-auto"
+            v-bind="props"
+            @click="navigateToProduct(product.id)"
+        >
+            <v-img
+                contain
+                aspect-ratio="1/1"
+                width="100%"
+                height="200"
+                :src="product.images[0]"
+            >
                 <v-card-title class="text-right px-2">
-                    <v-btn v-if="isHovering" v-tooltip:start="'Add to cart'" icon="mdi-cart-plus" color="primary"
-                        size="small" :class="{ 'on-hover': isHovering }"></v-btn>
+                    <v-btn
+                        v-if="isHovering"
+                        v-tooltip:start="'Add to cart'"
+                        icon="mdi-cart-plus"
+                        color="primary"
+                        size="small"
+                        :class="{ 'on-hover': isHovering }"
+                    ></v-btn>
                 </v-card-title>
             </v-img>
 
@@ -20,7 +46,6 @@
 </template>
 
 <script setup lang="ts">
-import helper from '../config/helper';
 import router from '@/router'
 
 defineProps({

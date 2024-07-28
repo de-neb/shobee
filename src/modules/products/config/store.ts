@@ -14,7 +14,9 @@ export const useProductStore = defineStore("product", {
         async getProducts(params: any) {
             try {
                 this.loading = true;
-                const { data } = await service.getProducts(params);
+                const {
+                    data: { data },
+                } = await service.getProducts(params);
 
                 this.products = data.map((row) => ({
                     ...row,
@@ -30,7 +32,11 @@ export const useProductStore = defineStore("product", {
         async getProductById(id: number) {
             try {
                 this.loading = true;
-                const { data } = await service.getProductById(id);
+                const {
+                    data: {
+                        data: [data],
+                    },
+                } = await service.getProductById(id);
                 data.currency = DEFAULT_CURRENCY;
 
                 this.viewingProduct = data;
@@ -42,7 +48,9 @@ export const useProductStore = defineStore("product", {
         },
 
         async getProductsByCategory(categoryId: string | number) {
-            const { data } = await service.getProducts({
+            const {
+                data: { data },
+            } = await service.getProducts({
                 categoryId,
             });
 

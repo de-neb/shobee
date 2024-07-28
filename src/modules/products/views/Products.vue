@@ -119,7 +119,8 @@
                                     <v-img
                                         v-if="image"
                                         contain
-                                        height="100%"
+                                        height="500"
+                                        width="100%"
                                         class="rounded-lg"
                                         :src="image"
                                         @click="previewImage = image"
@@ -139,7 +140,7 @@
                             class="d-flex flex-column justify-space-between"
                         >
                             <v-card-text class="d-flex flex-column ga-2">
-                                <h3 class="text-grey">{{ productStore.viewingProduct.category.name }}</h3>
+                                <h3 class="text-grey">{{ productStore.viewingProduct.category?.name }}</h3>
                                 <h1 class="text-h4 font-weight-black">{{ productStore.viewingProduct.title }}</h1>
                                 <h2>{{ productStore.viewingProduct.currency }}{{ productStore.viewingProduct.price }}
                                 </h2>
