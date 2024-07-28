@@ -66,18 +66,18 @@
         <!-- product preview -->
         <v-row justify="center">
             <v-sheet
-                class="pa-10"
                 width="100%"
-                min-height="700"
+                min-height="500"
                 v-if="Object.keys(productStore.viewingProduct).length"
             >
                 <v-card variant="flat">
                     <v-row justify="center">
-                        <v-col cols="auto d-flex ga-2 flex-column">
+                        <v-col cols="auto">
                             <v-card
                                 hover
                                 height="100"
                                 width="100"
+                                class="mb-3"
                                 v-for="(image, i) in productStore.viewingProduct.images"
                                 :key="i"
                                 :class="{ 'border-lg border-secondary border-opacity-100': activePreviewImageIndex === i }"
@@ -100,13 +100,13 @@
                             </v-card>
                         </v-col>
 
-                        <v-col cols="4">
+                        <v-col cols="5">
                             <v-carousel
                                 continuous
                                 cycle
                                 hide-delimiters
                                 direction="vertical"
-                                height="100%"
+                                height="auto"
                                 width="100%"
                                 v-model="activePreviewImageIndex"
                                 :show-arrows="false"
@@ -118,7 +118,7 @@
                                 >
                                     <v-img
                                         v-if="image"
-                                        cover
+                                        contain
                                         height="100%"
                                         class="rounded-lg"
                                         :src="image"
@@ -134,13 +134,16 @@
                             </v-carousel>
                         </v-col>
 
-                        <v-col cols="4">
-                            <v-card-text class="d-flex flex-column ga-3">
+                        <v-col
+                            cols="5"
+                            class="d-flex flex-column justify-space-between"
+                        >
+                            <v-card-text class="d-flex flex-column ga-2">
                                 <h3 class="text-grey">{{ productStore.viewingProduct.category.name }}</h3>
-                                <h1 class="text-h3 font-weight-black">{{ productStore.viewingProduct.title }}</h1>
+                                <h1 class="text-h4 font-weight-black">{{ productStore.viewingProduct.title }}</h1>
                                 <h2>{{ productStore.viewingProduct.currency }}{{ productStore.viewingProduct.price }}
                                 </h2>
-                                <p class="text-h6 font-weight-regular text-grey">{{
+                                <p class="text-body-1 font-weight-regular text-grey">{{
                                     productStore.viewingProduct.description }}
                                 </p>
                             </v-card-text>
@@ -172,7 +175,6 @@
 <script setup lang="ts">
 import { useProductStore } from '../config/store';
 import { BREADCRUMB_ITEMS } from '../config/contants';
-import helper from '@/modules/home/config/helper'
 import router from '@/router'
 import ProductRelated from '../components/ProductRelated.vue'
 
@@ -197,6 +199,11 @@ const initProduct = async () => {
 const onCarouselSlide = (index: number) => {
     activePreviewImageIndex.value = index
 }
+
+router.afterEach(async (to, from) => {
+    const id = to.params.id
+    await productStore.getProductById(id)
+})
 
 onMounted(async () => {
     await initProduct()

@@ -4,9 +4,10 @@
         width="100%"
     >
         <v-card variant="flat">
+            <v-card-title class="text-h5">Related Products</v-card-title>
             <v-data-iterator
                 :items="relatedProducts"
-                :items-per-page="5"
+                :items-per-page="4"
             >
                 <template v-slot:default="{ items }">
                     <v-row>
