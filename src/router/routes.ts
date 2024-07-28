@@ -29,4 +29,18 @@ export default [
             },
         ],
     },
+    {
+        path: "/filter",
+        name: "Filter",
+        component: () => import("@/layouts/Common.vue"),
+        children: [
+            {
+                path: "",
+                component: () => import("@/modules/filter/views/Filter.vue"),
+                meta: {
+                    layout: "Common",
+                },
+            },
+        ],
+    },
 ];
