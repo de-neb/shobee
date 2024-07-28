@@ -1,10 +1,19 @@
 <template>
-    <template v-if="productStore.loading">
+    <template v-if="isLoading">
         <v-row class="mt-5 mb-5">
             <v-skeleton-loader
                 type="heading"
                 width="200"
             ></v-skeleton-loader>
+        </v-row>
+        <v-row justify="space-between">
+            <v-skeleton-loader
+                v-for="card in 5"
+                :key="card"
+                type="card"
+                width="200"
+            >
+            </v-skeleton-loader>
         </v-row>
     </template>
 
@@ -41,13 +50,16 @@ import ProductCard from "./ProductCard.vue";
 const productStore = useProductStore();
 
 const topProducts = ref([])
+const isLoading = ref(false)
 
 const getRandomTopProducts = async () => {
+    isLoading.value = true
     const randomOffset = helper.generateRandomNumber(10, 20)
     topProducts.value = await productStore.getProducts({
         offset: randomOffset,
         limit: 8
     })
+    isLoading.value = false
 }
 
 onMounted(async () => {

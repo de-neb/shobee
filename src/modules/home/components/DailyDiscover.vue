@@ -1,6 +1,11 @@
 <template>
     <v-row class="mt-10 mb-5">
-        <h2>Daily Discover</h2>
+        <v-skeleton-loader
+            v-if="infiniteLoading || !infiniteProducts.length"
+            type="heading"
+            width="200"
+        ></v-skeleton-loader>
+        <h2 v-else>Daily Discover</h2>
     </v-row>
 
     <v-infinite-scroll
