@@ -4,11 +4,15 @@
         :elevation="2"
         type="card, text@3"
     ></v-skeleton-loader>
+
+
     <v-hover
         v-else
         v-slot="{ isHovering, props }"
     >
+        <!-- vertical -->
         <v-card
+            v-if="!horizontal"
             hover
             width="250"
             min-height="350"
@@ -43,6 +47,51 @@
                 <p class="font-weight-bold">{{ product.currency }} {{ product.price }}</p>
             </v-card-text>
         </v-card>
+
+        <!-- horizontal -->
+        <v-card
+            v-else
+            hover
+            height="250"
+            elevation="2"
+            class="mx-auto d-flex"
+            v-bind="props"
+            @click="navigateToProduct(product.id)"
+        >
+
+            <v-col
+                cols="3"
+                align-self="center"
+                class="pa-0"
+            >
+                <v-img
+                    cover
+                    class="rounded"
+                    :src="product.images[0]"
+                >
+                </v-img>
+            </v-col>
+
+            <v-col
+                cols="9"
+                class="py-0"
+            >
+                <v-card-text class="d-flex ga-3 flex-column">
+                    <h2 class="text-truncate font-weight-regular">{{ product.title }}</h2>
+                    <h3 class="text-subtitle text-grey">{{ product.category.name }}</h3>
+                    <h3 class="font-weight-bold">{{ product.currency }} {{ product.price }}</h3>
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-btn
+                        size="large"
+                        class="bg-primary px-5"
+                        variant="tonal"
+                    >Add to Cart</v-btn>
+                </v-card-actions>
+            </v-col>
+
+        </v-card>
     </v-hover>
 </template>
 
@@ -51,7 +100,11 @@ import router from '@/router'
 
 defineProps({
     product: Object,
-    loading: Boolean
+    loading: Boolean,
+    horizontal: {
+        type: Boolean,
+        default: false
+    }
 })
 
 const navigateToProduct = (id: number) => {

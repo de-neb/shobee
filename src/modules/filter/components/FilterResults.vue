@@ -18,7 +18,10 @@
                 cols="2"
                 align-self="center"
             >
-                <v-item-group class="d-flex ga-2 w-100 justify-end">
+                <v-item-group
+                    v-model="isGridView"
+                    class="d-flex ga-2 w-100 justify-end"
+                >
                     <v-item v-slot="{ isSelected, toggle }">
                         <v-icon
                             size="x-large"
@@ -41,11 +44,12 @@
         <v-row>
             <v-col
                 cols="12"
-                sm="3"
                 v-for="product in categoryProducts"
                 :key="product.id"
+                :sm="isGridView ? 3 : 12"
             >
                 <ProductCard
+                    :horizontal="!isGridView"
                     :product="product"
                     :loading="isLoading"
                 />
@@ -66,6 +70,7 @@ const filterBy = ref(FILTER_OPTIONS[0])
 
 const categoryProducts = ref([])
 const isLoading = ref(false)
+const isGridView = ref(0)
 
 const initProductsByCategory = async (id: string) => {
     isLoading.value = true
