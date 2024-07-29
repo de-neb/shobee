@@ -30,12 +30,12 @@ export default [
         ],
     },
     {
-        path: "/filter",
+        path: "/category",
         name: "Filter",
         component: () => import("@/layouts/Common.vue"),
         children: [
             {
-                path: "",
+                path: ":id",
                 component: () => import("@/modules/filter/views/Filter.vue"),
                 meta: {
                     layout: "Common",

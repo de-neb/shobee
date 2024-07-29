@@ -1,6 +1,9 @@
 <template>
     <!-- skeleton loader-->
-    <v-container v-if="productStore.loading">
+    <v-container
+        v-if="productStore.loading"
+        class="h-100 pt-15"
+    >
         <v-sheet height="700">
             <v-row justify="center">
                 <v-skeleton-loader
@@ -53,7 +56,10 @@
         </v-sheet>
     </v-container>
 
-    <v-container v-else>
+    <v-container
+        v-else
+        class="h-100 pt-10 d-flex flex-column"
+    >
         <!-- bread crumbs -->
         <v-row justify="center">
             <v-breadcrumbs :items="breadCrumbItems">
@@ -150,14 +156,55 @@
                             </v-card-text>
 
                             <v-card-actions>
-                                <v-btn
-                                    block
-                                    variant="flat"
-                                    color="secondary"
-                                    size="x-large"
-                                    class="font-weight-bold"
-                                >Add to
-                                    cart</v-btn>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="4">
+                                            <v-text-field
+                                                v-model="productStore.viewingProduct.order"
+                                                hide-details
+                                                hide-spin-buttons
+                                                type="number"
+                                                min="0"
+                                                variant="outlined"
+                                                density="comfortable"
+                                            >
+                                                <template #prepend-inner>
+                                                    <v-btn
+                                                        icon="mdi-minus"
+                                                        size="x-small"
+                                                        @click="onPrependClick"
+                                                    />
+                                                </template>
+
+                                                <template #append-inner>
+                                                    <v-btn
+                                                        icon="mdi-plus"
+                                                        size="x-small"
+                                                        @click="onAppendClick"
+                                                    />
+                                                </template>
+                                            </v-text-field>
+                                        </v-col>
+                                        <v-col cols="8">
+                                            <v-btn
+                                                block
+                                                variant="outlined"
+                                                color="success"
+                                                height="48"
+                                            > Add to Cart</v-btn>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row>
+                                        <v-btn
+                                            block
+                                            variant="flat"
+                                            color="primary"
+                                            size="x-large"
+                                            class="font-weight-bold"
+                                        >Buy
+                                            Now</v-btn>
+                                    </v-row>
+                                </v-container>
                             </v-card-actions>
                         </v-col>
                     </v-row>
@@ -205,6 +252,16 @@ router.afterEach(async (to, from) => {
     const id = to.params.id
     await productStore.getProductById(id)
 })
+
+const onAppendClick = () => {
+    productStore.viewingProduct.order++
+}
+
+const onPrependClick = (e) => {
+    if (productStore.viewingProduct.order > 1) {
+        productStore.viewingProduct.order--
+    }
+}
 
 onMounted(async () => {
     await initProduct()

@@ -1,10 +1,9 @@
 <template>
 
-    <v-container class="">
+    <v-container>
         <v-sheet id="topProducts">
             <TopProducts />
         </v-sheet>
-
 
         <v-sheet id="dailyDiscover">
             <DailyDiscover />

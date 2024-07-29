@@ -65,6 +65,7 @@
                             v-for="category in homeStore.categories"
                             :key="category.id"
                             :value="category.id"
+                            :to="`/category/${category.id}`"
                         >
                             <v-list-item-title class="text-capitalize">
                                 {{ category.name }}
@@ -97,6 +98,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { useHomeStore } from '@/modules/home/config/store';
+import router from '@/router'
 import navigationHelper from '@/helpers/navigationHelper';
 
 defineProps({

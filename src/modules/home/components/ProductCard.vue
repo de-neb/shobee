@@ -21,7 +21,8 @@
                 contain
                 aspect-ratio="1/1"
                 width="100%"
-                height="200"
+                height="auto"
+                min-height="200"
                 :src="product.images[0]"
             >
                 <v-card-title class="text-right px-2">
