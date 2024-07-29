@@ -11,6 +11,7 @@
                     density="comfortable"
                     v-model="filterBy"
                     :items="FILTER_OPTIONS"
+                    @update:modelValue="handleFilter"
                 ></v-select>
             </v-col>
 
@@ -61,6 +62,7 @@
 <script setup lang="ts">
 import { FILTER_OPTIONS } from '../config/constants';
 import { useProductStore } from '@/modules/products/config/store';
+import helper from '../config/helper';
 import router from '@/router'
 import ProductCard from '@/modules/home/components/ProductCard.vue';
 
@@ -76,6 +78,12 @@ const initProductsByCategory = async (id: string) => {
     isLoading.value = true
     categoryProducts.value = await productStore.getProductsByCategory(id)
     isLoading.value = false
+}
+
+const handleFilter = (value: string) => {
+    const [{ sortBy, sortByProp, type }] = FILTER_OPTIONS.filter((el: any) => el.value === value)
+
+    categoryProducts.value = helper.sortItems(categoryProducts.value, sortBy, sortByProp, type)
 }
 
 router.afterEach((to) => {
