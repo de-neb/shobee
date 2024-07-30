@@ -32,7 +32,7 @@
             <v-card-title class="text-h5">Related Products</v-card-title>
             <v-data-iterator
                 :items="relatedProducts"
-                :items-per-page="4"
+                :items-per-page="lgAndDown ? 4 : -1"
             >
                 <template v-slot:default="{ items }">
                     <v-row>
@@ -83,6 +83,7 @@
 
 <script setup lang="ts">
 import { useProductStore } from '../config/store'
+import { useDisplay } from 'vuetify';
 import ProductCard from '@/modules/home/components/ProductCard.vue'
 
 const props = defineProps({
@@ -90,13 +91,14 @@ const props = defineProps({
 })
 
 const productStore = useProductStore()
+const { lgAndDown } = useDisplay()
 
 const relatedProducts = ref([])
 const isLoading = ref(false)
 
 const initRelatedProducts = async () => {
     isLoading.value = true
-    relatedProducts.value = await productStore.getProductsByCategory(props.categoryId)
+    relatedProducts.value = await productStore.filterProducts(props.categoryId)
     isLoading.value = false
 }
 

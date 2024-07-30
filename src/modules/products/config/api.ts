@@ -15,14 +15,4 @@ export default {
             method: "get",
         });
     },
-
-    getProductsByCategory(categoryId: number) {
-        return serviceHelper({
-            url: "products",
-            method: "get",
-            params: {
-                categoryId,
-            },
-        });
-    },
 };

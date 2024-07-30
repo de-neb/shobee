@@ -37,12 +37,16 @@
                         title="Price"
                     ></v-list-item>
                 </template>
-                <h6>Price : insert price here</h6>
+                <span class="text-subtitle-1">Range : <span class="font-weight-bold">{{
+                    helper.readablePriceRange(productStore.priceRange) }}</span></span>
 
                 <v-range-slider
-                    :min="0"
-                    max="1000"
+                    strict
                     color="tertiary"
+                    v-model="productStore.priceRange"
+                    step="10"
+                    :min="0"
+                    :max="299"
                 ></v-range-slider>
 
             </v-list-group>
@@ -52,9 +56,12 @@
 
 <script setup lang="ts">
 import router from '@/router'
+import helper from '../config/helper';
 import { useHomeStore } from '@/modules/home/config/store';
+import { useProductStore } from '@/modules/products/config/store';
 
 const homeStore = useHomeStore()
+const productStore = useProductStore()
 
 const opened = ref(['Category', 'Price'])
 const currentCategory = ref<any[]>([])

@@ -1,9 +1,27 @@
 <template>
-    <v-skeleton-loader
-        v-if="loading"
-        :elevation="2"
-        type="card, text@3"
-    ></v-skeleton-loader>
+    <template v-if="loading">
+        <v-skeleton-loader
+            v-if="!horizontal"
+            type="card, text@3"
+            :elevation="2"
+        ></v-skeleton-loader>
+
+        <v-row v-else>
+            <v-col cosl="3">
+                <v-skeleton-loader type="image"></v-skeleton-loader>
+            </v-col>
+            <v-col cols="9">
+                <v-skeleton-loader
+                    type="heading"
+                    width="400"
+                ></v-skeleton-loader>
+                <v-skeleton-loader
+                    type="text@3"
+                    width="400"
+                ></v-skeleton-loader>
+            </v-col>
+        </v-row>
+    </template>
 
 
     <v-hover
@@ -27,7 +45,7 @@
                 width="100%"
                 height="auto"
                 min-height="200"
-                :src="product.images[0]"
+                :src="miscHelper.parsePossibleJSON(product.images[0])"
             >
                 <v-card-title class="text-right px-2">
                     <v-btn
@@ -67,7 +85,7 @@
                 <v-img
                     cover
                     class="rounded"
-                    :src="product.images[0]"
+                    :src="miscHelper.parsePossibleJSON(product.images[0])"
                 >
                 </v-img>
             </v-col>
@@ -97,6 +115,7 @@
 
 <script setup lang="ts">
 import router from '@/router'
+import miscHelper from '@/helpers/miscHelper';
 
 defineProps({
     product: Object,

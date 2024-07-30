@@ -13,4 +13,17 @@ export default {
             return this.generateImgUrl("/src/assets/default-product-image.png");
         }
     },
+    parsePossibleJSON(value: string) {
+        try {
+            const parsedValue = JSON.parse(value);
+
+            if (Array.isArray(parsedValue)) {
+                return parsedValue[0];
+            }
+
+            return parsedValue;
+        } catch (error) {
+            return value;
+        }
+    },
 };

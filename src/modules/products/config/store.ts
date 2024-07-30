@@ -2,21 +2,23 @@
 import { defineStore } from "pinia";
 import service from "./api";
 import { DEFAULT_CURRENCY } from "./contants";
+import router from "@/router";
 
 export const useProductStore = defineStore("product", {
     state: () => ({
         products: [],
         loading: false,
-        viewingProduct: {},
+        viewingProduct: {
+            order: 0,
+        },
+        priceRange: <number[]>[],
     }),
 
     actions: {
         async getProducts(params: any) {
             try {
                 this.loading = true;
-                const {
-                    data: { data },
-                } = await service.getProducts(params);
+                const { data } = await service.getProducts(params);
 
                 this.products = data.map((row) => ({
                     ...row,
@@ -32,14 +34,10 @@ export const useProductStore = defineStore("product", {
         async getProductById(id: number) {
             try {
                 this.loading = true;
-                const {
-                    data: {
-                        data: [data],
-                    },
-                } = await service.getProductById(id);
+                const { data } = await service.getProductById(id);
                 data.currency = DEFAULT_CURRENCY;
 
-                this.viewingProduct = data;
+                this.viewingProduct = { ...this.viewingProduct, ...data };
 
                 return data;
             } finally {
@@ -47,19 +45,21 @@ export const useProductStore = defineStore("product", {
             }
         },
 
-        async getProductsByCategory(categoryId: string | number) {
-            const {
-                data: { data },
-            } = await service.getProducts({
-                categoryId,
-            });
+        async filterProducts(id: string) {
+            const params = {
+                categoryId: id ?? router.currentRoute.value.params.id,
+                price_min: this.priceRange[0],
+                price_max: this.priceRange[1],
+            };
 
-            const relatedProducts = data.map((row) => ({
+            const { data } = await service.getProducts(params);
+
+            const products = data.map((row) => ({
                 ...row,
                 currency: DEFAULT_CURRENCY,
             }));
 
-            return relatedProducts;
+            return products;
         },
     },
 });

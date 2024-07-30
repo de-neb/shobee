@@ -43,4 +43,19 @@ export default {
             return sortedItems.reverse();
         }
     },
+
+    readablePriceRange(range: number[]) {
+        let [min, max] = range;
+
+        if (isNaN(min) && isNaN(max)) {
+            min = max = 0;
+        }
+
+        const numberFormat = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+
+        return `${numberFormat.format(min)} - ${numberFormat.format(max)}`;
+    },
 };
