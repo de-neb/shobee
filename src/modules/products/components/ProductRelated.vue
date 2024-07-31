@@ -32,13 +32,12 @@
             <v-card-title class="text-h5">Related Products</v-card-title>
             <v-data-iterator
                 :items="relatedProducts"
-                :items-per-page="lgAndDown ? 4 : -1"
+                :items-per-page="itemsPerPage"
             >
                 <template v-slot:default="{ items }">
                     <v-row>
                         <v-col
-                            md="3"
-                            xl="2"
+                            lg="3"
                             alig-self="center"
                             v-for="product in items"
                             :key="product.id"
@@ -91,10 +90,13 @@ const props = defineProps({
 })
 
 const productStore = useProductStore()
-const { lgAndDown } = useDisplay()
+const { lgAndUp } = useDisplay()
 
 const relatedProducts = ref([])
 const isLoading = ref(false)
+
+
+const itemsPerPage = computed(() => lgAndUp && relatedProducts.value.length > 6 ? 4 : -1)
 
 const initRelatedProducts = async () => {
     isLoading.value = true

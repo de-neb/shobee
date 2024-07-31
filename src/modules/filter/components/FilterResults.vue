@@ -1,11 +1,12 @@
 <template>
-    <v-container
-        height="100%"
-        class="py-8"
-    >
-
-        <v-row v-if="!categoryProducts.length">
+    <v-container class="py-8 h-100">
+        <v-row
+            v-if="!categoryProducts.length && !isLoading"
+            align="center"
+            class="h-100"
+        >
             <v-empty-state
+                class="mx-auto"
                 headline="Oops! We Couldn't Find What You're Looking For"
                 text="We’ve searched high and low, but it looks like we don’t have the product you’re looking for right now."
             >
@@ -86,7 +87,6 @@ import { useProductStore } from '@/modules/products/config/store';
 import helper from '../config/helper';
 import router from '@/router'
 import ProductCard from '@/modules/home/components/ProductCard.vue';
-import { ca } from 'vuetify/locale';
 
 const productStore = useProductStore()
 

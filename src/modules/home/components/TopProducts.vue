@@ -27,8 +27,7 @@
             align="center"
         >
             <v-col
-                md="4"
-                lg="3"
+                lg="2"
                 alig-self="center"
                 v-for="product in topProducts"
                 :key="product.id"

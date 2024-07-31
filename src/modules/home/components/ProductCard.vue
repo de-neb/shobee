@@ -32,7 +32,7 @@
         <v-card
             v-if="!horizontal"
             hover
-            width="250"
+            width="100%"
             min-height="350"
             elevation="2"
             class="mx-auto"
