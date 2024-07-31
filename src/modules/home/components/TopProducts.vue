@@ -7,13 +7,16 @@
             ></v-skeleton-loader>
         </v-row>
         <v-row justify="space-between">
-            <v-skeleton-loader
+            <v-card
                 v-for="card in 5"
                 :key="card"
-                type="card"
-                width="200"
             >
-            </v-skeleton-loader>
+                <v-skeleton-loader
+                    type="card, text@3"
+                    width="300"
+                >
+                </v-skeleton-loader>
+            </v-card>
         </v-row>
     </template>
 
@@ -49,10 +52,9 @@ import ProductCard from "./ProductCard.vue";
 const productStore = useProductStore();
 
 const topProducts = ref([])
-const isLoading = ref(false)
+const isLoading = ref(true)
 
 const getRandomTopProducts = async () => {
-    isLoading.value = true
     const randomOffset = helper.generateRandomNumber(10, 20)
     topProducts.value = await productStore.getProducts({
         offset: randomOffset,

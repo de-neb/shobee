@@ -119,7 +119,10 @@ import miscHelper from '@/helpers/miscHelper';
 
 defineProps({
     product: Object,
-    loading: Boolean,
+    loading: {
+        type: Boolean,
+        default: true
+    },
     horizontal: {
         type: Boolean,
         default: false
