@@ -12,7 +12,7 @@
             class="mx-10 cursor-pointer"
             contain
             src="../assets/logo.png"
-            @click="navigationHelper.to('homeStore')"
+            @click="navigationHelper.to('home')"
         >
         </v-img>
 
