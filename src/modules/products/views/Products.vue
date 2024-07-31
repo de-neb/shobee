@@ -62,11 +62,7 @@
     >
         <!-- bread crumbs -->
         <v-row justify="center">
-            <v-breadcrumbs :items="breadCrumbItems">
-                <template v-slot:divider>
-                    <v-icon icon="mdi-chevron-right"></v-icon>
-                </template>
-            </v-breadcrumbs>
+            <BreadCrumb />
         </v-row>
 
         <!-- product preview -->
@@ -106,7 +102,10 @@
                             </v-card>
                         </v-col>
 
-                        <v-col cols="5">
+                        <v-col
+                            cols="5"
+                            lg="4"
+                        >
                             <v-carousel
                                 continuous
                                 cycle
@@ -143,6 +142,7 @@
 
                         <v-col
                             cols="5"
+                            lg="4"
                             class="d-flex flex-column justify-space-between"
                         >
                             <v-card-text class="d-flex flex-column ga-2">
@@ -214,7 +214,9 @@
 
         <!-- related products -->
         <v-row justify="center">
-            <ProductRelated :category-id="categoryId" />
+            <v-col cols="10">
+                <ProductRelated :category-id="categoryId" />
+            </v-col>
         </v-row>
     </v-container>
 
@@ -222,7 +224,6 @@
 
 <script setup lang="ts">
 import { useProductStore } from '../config/store';
-import { BREADCRUMB_ITEMS } from '../config/contants';
 import router from '@/router'
 import ProductRelated from '../components/ProductRelated.vue'
 
@@ -233,11 +234,6 @@ const activePreviewImageIndex = ref(0)
 
 const categoryId = computed(() => productStore.viewingProduct?.category?.id)
 
-const breadCrumbItems = computed(() => [...BREADCRUMB_ITEMS, {
-    title: productStore.viewingProduct.title,
-    disabled: false,
-    href: `/products/${productStore.viewingProduct.id}`
-}])
 
 const initProduct = async () => {
     const id = router.currentRoute.value.params.id
@@ -248,9 +244,12 @@ const onCarouselSlide = (index: number) => {
     activePreviewImageIndex.value = index
 }
 
-router.afterEach(async (to, from) => {
-    const id = to.params.id
-    await productStore.getProductById(id)
+router.beforeEach(async (to, from) => {
+    if (to.name === 'Product') {
+        const id = to.params.id
+        await productStore.getProductById(id)
+        to.meta.productName = productStore.viewingProduct.title
+    }
 })
 
 const onAppendClick = () => {
