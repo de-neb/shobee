@@ -1,4 +1,6 @@
 <template>
+  <CartSidePanel ref="cartSidePanel" />
+
   <v-app>
     <AppBar background="bg-primary" />
     <v-sheet

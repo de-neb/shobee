@@ -2,7 +2,13 @@
 import { defineStore } from "pinia";
 
 export const useAppStore = defineStore("app", {
-    state: () => ({}),
+    state: () => ({
+        isCartSidePanelOpen: false,
+    }),
 
-    actions: {},
+    actions: {
+        toggleCartSidePanel() {
+            this.isCartSidePanelOpen = !this.isCartSidePanelOpen;
+        },
+    },
 });
