@@ -1,18 +1,20 @@
 <template>
-    <v-snackbar vertical timer v-if="snackbar.show" :timeout="snackbar.duration">
-        <div class="text-subtitle-1 pb-2">{{ snackbar.message }}</div>
-        <template v-slot:actions>
-            <v-btn color="indigo" variant="text" @click="snackbar.show = false">
-                Close
-            </v-btn>
-        </template>
-    </v-snackbar>
+    <v-snackbar-queue
+        vertical
+        location="top right"
+        timer="white"
+        transition="slide-x-transition"
+        v-model="snackbar.messages"
+        :timeout="snackbar.duration"
+        :color="snackbar.color"
+    >
+    </v-snackbar-queue>
 </template>
 
 <script setup lang="ts">
-import { useSnackbar } from '@/stores/snackbar';
+import { useSnackbarStore } from '@/stores/snackbar';
 
-const snackbar = useSnackbar()
+const snackbar = useSnackbarStore()
 
 </script>
 

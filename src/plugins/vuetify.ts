@@ -7,6 +7,7 @@
 // Styles
 import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
+import { VSnackbarQueue } from "vuetify/labs/VSnackbarQueue";
 
 // Composables
 import { createVuetify, type ThemeDefinition } from "vuetify";
@@ -37,5 +38,8 @@ export default createVuetify({
         themes: {
             light,
         },
+    },
+    components: {
+        VSnackbarQueue,
     },
 });

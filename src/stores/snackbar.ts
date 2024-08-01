@@ -1,18 +1,21 @@
-import {defineStore} from 'pinia'
+import { defineStore } from "pinia";
 
-export const useSnackbar = defineStore('snackbar',{
+export const useSnackbarStore = defineStore("snackbar", {
     state: () => ({
-        message: '',
-        show: false,
-        duration: 5000,
-        color: ''
+        messages: <string[]>[],
+        duration: 2000,
+        color: "success",
     }),
 
     actions: {
-        show(message:string,color: string){
-            this.message = message
-            this.show = true
-            this.color = color
-        }
-    }
-})
+        show(
+            message: string,
+            color: string = "success",
+            duration: number = 2000
+        ) {
+            this.messages.push(message);
+            this.color = color;
+            this.duration = duration;
+        },
+    },
+});
