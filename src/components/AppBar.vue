@@ -33,6 +33,7 @@
             <v-btn
                 class="text-none"
                 stacked
+                @click="appStore.toggleCartSidePanel"
             >
                 <v-badge
                     color="info"
@@ -98,7 +99,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { useHomeStore } from '@/modules/home/config/store';
-import router from '@/router'
+import { useAppStore } from '@/stores/app';
 import navigationHelper from '@/helpers/navigationHelper';
 
 defineProps({
@@ -109,6 +110,7 @@ defineProps({
 })
 
 const homeStore = useHomeStore()
+const appStore = useAppStore()
 
 onMounted(() => {
     homeStore.loadAllCategories()

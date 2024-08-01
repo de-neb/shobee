@@ -6,7 +6,7 @@
         <template v-slot:item="{ item }">
             <v-breadcrumbs-item
                 exact
-                class="text-subtitle-2 crumb-item"
+                class="crumb-item font-weight-bold"
                 :disabled="item.disabled"
                 :to="item.to"
             >

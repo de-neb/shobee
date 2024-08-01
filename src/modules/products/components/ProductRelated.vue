@@ -1,7 +1,6 @@
 <template>
-    <v-sheet
+    <v-container
         v-if="isLoading"
-        class="pa-10"
         width="100%"
     >
         <v-row>
@@ -21,63 +20,61 @@
                 width="200"
             ></v-skeleton-loader>
         </v-row>
-    </v-sheet>
+    </v-container>
 
-    <v-sheet
+    <v-card
         v-else
-        class="pa-10"
+        variant="flat"
         width="100%"
     >
-        <v-card variant="flat">
-            <v-card-title class="text-h5">Related Products</v-card-title>
-            <v-data-iterator
-                :items="relatedProducts"
-                :items-per-page="itemsPerPage"
-            >
-                <template v-slot:default="{ items }">
-                    <v-row>
-                        <v-col
-                            lg="3"
-                            alig-self="center"
-                            v-for="product in items"
-                            :key="product.id"
-                        >
-                            <ProductCard
-                                :product="product.raw"
-                                :loading="isLoading"
-                            />
-                        </v-col>
-                    </v-row>
-                </template>
+        <v-card-title class="text-h5">Related Products</v-card-title>
+        <v-data-iterator
+            :items="relatedProducts"
+            :items-per-page="itemsPerPage"
+        >
+            <template v-slot:default="{ items }">
+                <v-row>
+                    <v-col
+                        lg="3"
+                        alig-self="center"
+                        v-for="product in items"
+                        :key="product.id"
+                    >
+                        <ProductCard
+                            :product="product.raw"
+                            :loading="isLoading"
+                        />
+                    </v-col>
+                </v-row>
+            </template>
 
-                <template v-slot:footer="{ page, pageCount, prevPage, nextPage }">
-                    <div class="d-flex align-center justify-center pa-4">
-                        <v-btn
-                            :disabled="page === 1"
-                            density="comfortable"
-                            icon="mdi-arrow-left"
-                            variant="tonal"
-                            rounded
-                            @click="prevPage"
-                        ></v-btn>
+            <template v-slot:footer="{ page, pageCount, prevPage, nextPage }">
+                <div class="d-flex align-center justify-center pa-4">
+                    <v-btn
+                        :disabled="page === 1"
+                        density="comfortable"
+                        icon="mdi-arrow-left"
+                        variant="tonal"
+                        rounded
+                        @click="prevPage"
+                    ></v-btn>
 
-                        <div class="mx-2 text-caption">
-                            Page {{ page }} of {{ pageCount }}
-                        </div>
-
-                        <v-btn
-                            :disabled="page >= pageCount"
-                            density="comfortable"
-                            icon="mdi-arrow-right"
-                            variant="tonal"
-                            rounded
-                            @click="nextPage"
-                        ></v-btn>
+                    <div class="mx-2 text-caption">
+                        Page {{ page }} of {{ pageCount }}
                     </div>
-                </template>
-            </v-data-iterator>
-        </v-card>
-    </v-sheet>
+
+                    <v-btn
+                        :disabled="page >= pageCount"
+                        density="comfortable"
+                        icon="mdi-arrow-right"
+                        variant="tonal"
+                        rounded
+                        @click="nextPage"
+                    ></v-btn>
+                </div>
+            </template>
+        </v-data-iterator>
+    </v-card>
 </template>
 
 <script setup lang="ts">
