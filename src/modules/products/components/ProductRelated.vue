@@ -1,7 +1,7 @@
 <template>
     <v-container
         v-if="isLoading"
-        width="100%"
+        fluid
     >
         <v-row>
             <v-skeleton-loader
@@ -25,55 +25,58 @@
     <v-card
         v-else
         variant="flat"
-        width="100%"
+        fluid
     >
         <v-card-title class="text-h5">Related Products</v-card-title>
-        <v-data-iterator
-            :items="relatedProducts"
-            :items-per-page="itemsPerPage"
-        >
-            <template v-slot:default="{ items }">
-                <v-row>
-                    <v-col
-                        lg="3"
-                        alig-self="center"
-                        v-for="product in items"
-                        :key="product.id"
-                    >
-                        <ProductCard
-                            :product="product.raw"
-                            :loading="isLoading"
-                        />
-                    </v-col>
-                </v-row>
-            </template>
 
-            <template v-slot:footer="{ page, pageCount, prevPage, nextPage }">
-                <div class="d-flex align-center justify-center pa-4">
-                    <v-btn
-                        :disabled="page === 1"
-                        density="comfortable"
-                        icon="mdi-arrow-left"
-                        variant="tonal"
-                        rounded
-                        @click="prevPage"
-                    ></v-btn>
+        <v-card-text>
+            <v-data-iterator
+                :items="relatedProducts"
+                :items-per-page="itemsPerPage"
+            >
+                <template v-slot:default="{ items }">
+                    <v-row>
+                        <v-col
+                            lg="3"
+                            alig-self="center"
+                            v-for="product in items"
+                            :key="product.id"
+                        >
+                            <ProductCard
+                                :product="product.raw"
+                                :loading="isLoading"
+                            />
+                        </v-col>
+                    </v-row>
+                </template>
 
-                    <div class="mx-2 text-caption">
-                        Page {{ page }} of {{ pageCount }}
+                <template v-slot:footer="{ page, pageCount, prevPage, nextPage }">
+                    <div class="d-flex align-center justify-center pa-4">
+                        <v-btn
+                            :disabled="page === 1"
+                            density="comfortable"
+                            icon="mdi-arrow-left"
+                            variant="tonal"
+                            rounded
+                            @click="prevPage"
+                        ></v-btn>
+
+                        <div class="mx-2 text-caption">
+                            Page {{ page }} of {{ pageCount }}
+                        </div>
+
+                        <v-btn
+                            :disabled="page >= pageCount"
+                            density="comfortable"
+                            icon="mdi-arrow-right"
+                            variant="tonal"
+                            rounded
+                            @click="nextPage"
+                        ></v-btn>
                     </div>
-
-                    <v-btn
-                        :disabled="page >= pageCount"
-                        density="comfortable"
-                        icon="mdi-arrow-right"
-                        variant="tonal"
-                        rounded
-                        @click="nextPage"
-                    ></v-btn>
-                </div>
-            </template>
-        </v-data-iterator>
+                </template>
+            </v-data-iterator>
+        </v-card-text>
     </v-card>
 </template>
 

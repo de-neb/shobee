@@ -30,7 +30,7 @@
             align="center"
         >
             <v-col
-                lg="2"
+                lg="3"
                 alig-self="center"
                 v-for="product in topProducts"
                 :key="product.id"
