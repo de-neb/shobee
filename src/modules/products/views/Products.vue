@@ -3,6 +3,7 @@
     <v-container
         v-if="productStore.loading"
         class="pt-15"
+        fluid
     >
         <v-sheet height="700">
             <v-row justify="center">
@@ -59,6 +60,7 @@
     <v-container
         v-else
         class="pt-10 d-flex flex-column"
+        fluid
     >
         <!-- bread crumbs -->
         <v-row justify="center">
@@ -102,7 +104,8 @@
 
             <v-col
                 cols="12"
-                sm="4"
+                md="4"
+                lg="5"
             >
                 <v-carousel
                     continuous
@@ -140,7 +143,7 @@
 
             <v-col
                 cols="12"
-                sm="5"
+                md="5"
                 lg="4"
             >
                 <v-row
@@ -161,33 +164,7 @@
                     <v-col>
                         <v-row>
                             <v-col cols="4">
-                                <v-text-field
-                                    v-model="productStore.viewingProduct.order"
-                                    hide-details
-                                    hide-spin-buttons
-                                    type="number"
-                                    min="0"
-                                    variant="outlined"
-                                    density="comfortable"
-                                >
-                                    <template #prepend-inner>
-                                        <v-btn
-                                            icon="mdi-minus"
-                                            size="small"
-                                            variant="flat"
-                                            @click="onPrependClick"
-                                        />
-                                    </template>
-
-                                    <template #append-inner>
-                                        <v-btn
-                                            icon="mdi-plus"
-                                            size="small"
-                                            variant="flat"
-                                            @click="onAppendClick"
-                                        />
-                                    </template>
-                                </v-text-field>
+                                <QuantityInput v-model="productStore.viewingProduct.order" />
                             </v-col>
                             <v-col cols="8">
                                 <v-btn
@@ -223,7 +200,7 @@
         >
             <v-col
                 cols="12"
-                sm="9"
+                sm="10"
             >
                 <ProductRelated :category-id="categoryId" />
             </v-col>
