@@ -2,6 +2,7 @@ export default {
     generateImgUrl(url: string) {
         return new URL(url, import.meta.url).href;
     },
+
     getImageSrc(name: string, folder: string) {
         try {
             if (folder) {
@@ -13,6 +14,7 @@ export default {
             return this.generateImgUrl("/src/assets/default-product-image.png");
         }
     },
+
     parsePossibleJSON(value: string) {
         try {
             const parsedValue = JSON.parse(value);
@@ -25,5 +27,14 @@ export default {
         } catch (error) {
             return value;
         }
+    },
+
+    formatPrice(price: number) {
+        const numberFormat = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+
+        return numberFormat.format(price);
     },
 };

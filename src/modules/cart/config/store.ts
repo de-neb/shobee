@@ -1,18 +1,47 @@
 import { defineStore } from "pinia";
 import { CART_STORAGE_KEY } from "./constants";
 import { useSnackbarStore as snackbarStore } from "@/stores/snackbar";
+import miscHelper from "@/helpers/miscHelper";
 
 export const useCartStore = defineStore("cart", {
     state: () => ({
         cart: <any[]>[],
     }),
 
+    getters: {
+        subTotal(state) {
+            const subTotal = state.cart.reduce((acc, product) => {
+                const productTotalPrice =
+                    parseFloat(product.price) * parseInt(product.quantity);
+
+                return acc + productTotalPrice;
+            }, 0);
+
+            return miscHelper.formatPrice(subTotal);
+        },
+
+        cartItemsTotal(state) {
+            return state.cart.reduce(
+                (acc, product) => acc + product.quantity,
+                0
+            );
+        },
+    },
+
     actions: {
-        setCartInLocalStorage(data: any) {
+        setCartInLocalStorage() {
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(this.cart));
+        },
+
+        updateCartInLocalStorage(data: any) {
             this.getCartFromLocalStorage();
-            if (!this.cart) {
+
+            if (!this.cart || !this.cart.length) {
                 data.quantity = 1;
-                localStorage.setItem(CART_STORAGE_KEY, JSON.stringify([data]));
+
+                this.cart.push(data);
+
+                this.setCartInLocalStorage();
             } else {
                 // check if the same product was already added in the cart
                 const existingProductIndex = this.cart.findIndex(
@@ -22,13 +51,11 @@ export const useCartStore = defineStore("cart", {
                 if (existingProductIndex > -1) {
                     this.cart[existingProductIndex].quantity += 1;
                 } else {
+                    data.quantity = 1;
                     this.cart.push(data);
                 }
 
-                localStorage.setItem(
-                    CART_STORAGE_KEY,
-                    JSON.stringify(this.cart)
-                );
+                this.setCartInLocalStorage();
             }
 
             snackbarStore().show(`${data.title} added successfully.`);
@@ -38,8 +65,14 @@ export const useCartStore = defineStore("cart", {
             this.cart = JSON.parse(
                 localStorage.getItem(CART_STORAGE_KEY) as string
             );
+        },
 
-            console.log("get", this.cart);
+        removeProduct(id: string) {
+            this.cart = this.cart.filter((product) => product.id !== id);
+
+            this.setCartInLocalStorage();
+
+            snackbarStore().show("Item removed successfully.");
         },
     },
 });

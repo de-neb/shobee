@@ -55,6 +55,7 @@
                         color="primary"
                         size="small"
                         :class="{ 'on-hover': isHovering }"
+                        @click.stop="addToCart"
                     ></v-btn>
                 </v-card-title>
             </v-img>
@@ -105,6 +106,7 @@
                         size="large"
                         class="bg-primary px-5"
                         variant="tonal"
+                        @click.stop="addToCart"
                     >Add to Cart</v-btn>
                 </v-card-actions>
             </v-col>
@@ -116,8 +118,9 @@
 <script setup lang="ts">
 import router from '@/router'
 import miscHelper from '@/helpers/miscHelper';
+import { useCartStore } from '@/modules/cart/config/store';
 
-defineProps({
+const props = defineProps({
     product: Object,
     loading: {
         type: Boolean,
@@ -128,6 +131,12 @@ defineProps({
         default: false
     }
 })
+
+const cartStore = useCartStore()
+
+const addToCart = () => {
+    cartStore.updateCartInLocalStorage(props.product)
+}
 
 const navigateToProduct = (id: number) => {
     router.push({ path: `/products/${id}` })

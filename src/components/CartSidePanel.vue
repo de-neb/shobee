@@ -9,6 +9,7 @@
         persistent
         class="cart-drawer"
     >
+
         <v-container class="h-100">
             <v-row class="flex-column h-100">
                 <v-col class="flex-grow-0 d-flex flex-nowrap justify-space-between align-center">
@@ -23,59 +24,124 @@
 
                 </v-col>
 
-                <v-col class="flex-grow-1 overflow-auto">
-                    <v-list lines="three">
+                <template v-if="cartStore.cart && cartStore.cart.length">
+                    <v-col class="flex-grow-1 overflow-auto">
+                        <v-list lines="three">
 
-                        <v-list-item
-                            v-for="product in cartStore.cart"
-                            :key="product.id"
+                            <template
+                                v-for="product in cartStore.cart"
+                                :key="product.id"
+                            >
+                                <v-list-item>
+                                    <v-row
+                                        class="flex-nowrap ga-1"
+                                        no-gutters
+                                    >
+                                        <v-col
+                                            cols="auto"
+                                            align-self="center"
+                                        >
+                                            <v-img
+                                                width="110"
+                                                aspect-ration="1/1"
+                                                cover
+                                                class="rounded"
+                                                :src="product.images[0]"
+                                            ></v-img>
+                                        </v-col>
+
+                                        <v-col cols="7">
+                                            <v-row
+                                                no-gutters
+                                                justify="space-around"
+                                                class="flex-column px-2 ga-4"
+                                            >
+                                                <v-col cols="auto">
+                                                    <p
+                                                        class="font-weight-bold text-truncate"
+                                                        v-tooltip="product.title"
+                                                    >{{
+                                                        product.title }}</p>
+                                                    <p class="font-weight-medium">{{ product.currency }} {{
+                                                        product.price
+                                                        }}
+                                                    </p>
+                                                </v-col>
+
+
+                                                <v-col cols="7">
+                                                    <QuantityInput
+                                                        density="compact"
+                                                        v-model="product.quantity"
+                                                    />
+                                                </v-col>
+
+                                            </v-row>
+                                        </v-col>
+
+                                        <v-col
+                                            cols="auto"
+                                            align-self="stretch"
+                                        >
+                                            <v-btn
+                                                variant="text"
+                                                color="blue"
+                                                icon="mdi-delete-outline"
+                                                size="small"
+                                                rounded="0"
+                                                class="rounded"
+                                                height="100%"
+                                                v-tooltip="'Remove'"
+                                                @click="cartStore.removeProduct(product.id)"
+                                            ></v-btn>
+                                        </v-col>
+
+                                    </v-row>
+                                </v-list-item>
+
+                                <v-divider></v-divider>
+                            </template>
+
+                        </v-list>
+                    </v-col>
+
+                    <v-col class="flex-grow-0 d-flex justify-space-between align-center">
+                        <span class="text-subtitle font-weight-medium">Subtotal</span>
+
+                        <span class="text-h4">{{ cartStore.subTotal }}</span>
+                    </v-col>
+
+                    <v-divider></v-divider>
+
+                    <v-col class="flex-grow-0 d-flex flex-column ga-2">
+                        <v-btn
+                            block
+                            size="x-large"
+                            variant="flat"
+                            color="primary"
                         >
-                            <v-row class="text-nowrap">
-                                <v-col cols="auto">
-                                    <v-img
-                                        width="100"
-                                        height="100"
-                                        class="rounded"
-                                        :src="product.images[0]"
-                                    ></v-img>
-                                </v-col>
+                            Continue to Checkout
+                        </v-btn>
+                        <v-btn
+                            block
+                            size="x-large"
+                            variant="text"
+                            color="primary"
+                        >
+                            View Cart
+                        </v-btn>
+                    </v-col>
+                </template>
 
-                                <v-col cols="7">
-                                    <p class="font-weight-bold text-wrap">{{ product.title }}</p>
-
-
-                                </v-col>
-
-                            </v-row>
-                        </v-list-item>
-
-                        <v-divider></v-divider>
-
-                    </v-list>
+                <v-col v-else>
+                    <v-empty-state
+                        title="Your cart is empty."
+                        image="/src/assets/empty-bag.jpeg"
+                    ></v-empty-state>
                 </v-col>
-
-                <v-col class="flex-grow-0 d-flex justify-space-between align-center">
-                    <span class="text-caption">Subtotal:</span>
-
-                    <span class="text-h3">PRICE</span>
-                </v-col>
-
-                <v-divider></v-divider>
-
-                <v-col class="flex-grow-0">
-                    <v-btn
-                        block
-                        size="x-large"
-                        variant="flat"
-                        color="primary"
-                    >
-                        View Cart
-                    </v-btn>
-                </v-col>
-
-
             </v-row>
         </v-container>
+
     </v-navigation-drawer>
 </template>
 
@@ -85,6 +151,10 @@ import { useCartStore } from '@/modules/cart/config/store';
 
 const appStore = useAppStore()
 const cartStore = useCartStore()
+
+watch(() => cartStore.cart, () => {
+    cartStore.setCartInLocalStorage()
+}, { deep: true })
 
 onMounted(() => {
     cartStore.getCartFromLocalStorage()
