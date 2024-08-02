@@ -28,7 +28,9 @@
 
         <v-spacer></v-spacer>
 
-        <div class="mx-10">P1000
+        <div class="mx-10 d-flex align-center">
+
+            <p>{{ cartStore.subTotal }}</p>
 
             <v-btn
                 class="text-none"
@@ -37,7 +39,7 @@
             >
                 <v-badge
                     color="info"
-                    content="0"
+                    :content="cartStore.cartItemsTotal"
                 >
                     <v-icon>mdi-cart</v-icon>
                 </v-badge>
@@ -99,6 +101,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { useHomeStore } from '@/modules/home/config/store';
+import { useCartStore } from '@/modules/cart/config/store';
 import { useAppStore } from '@/stores/app';
 import navigationHelper from '@/helpers/navigationHelper';
 
@@ -110,6 +113,7 @@ defineProps({
 })
 
 const homeStore = useHomeStore()
+const cartStore = useCartStore()
 const appStore = useAppStore()
 
 onMounted(() => {
