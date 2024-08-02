@@ -28,7 +28,7 @@
                     <v-col class="flex-grow-1 overflow-auto">
                         <v-list lines="three">
 
-                            <template
+                            <div
                                 v-for="product in cartStore.cart"
                                 :key="product.id"
                             >
@@ -57,10 +57,7 @@
                                                 class="flex-column px-2 ga-4"
                                             >
                                                 <v-col cols="auto">
-                                                    <p
-                                                        class="font-weight-bold text-truncate"
-                                                        v-tooltip="product.title"
-                                                    >{{
+                                                    <p class="font-weight-bold">{{
                                                         product.title }}</p>
                                                     <p class="font-weight-medium">{{ product.currency }} {{
                                                         product.price
@@ -89,9 +86,7 @@
                                                 icon="mdi-delete-outline"
                                                 size="small"
                                                 rounded="0"
-                                                class="rounded"
                                                 height="100%"
-                                                v-tooltip="'Remove'"
                                                 @click="cartStore.removeProduct(product.id)"
                                             ></v-btn>
                                         </v-col>
@@ -100,7 +95,7 @@
                                 </v-list-item>
 
                                 <v-divider></v-divider>
-                            </template>
+                            </div>
 
                         </v-list>
                     </v-col>
