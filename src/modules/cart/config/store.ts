@@ -26,6 +26,16 @@ export const useCartStore = defineStore("cart", {
                 0
             );
         },
+
+        cartCharges(state) {
+            const data = {
+                Subtotal: this.subTotal,
+                "Delivery Charges": "$0.00",
+                "Grand Total": this.subTotal,
+            };
+
+            return data;
+        },
     },
 
     actions: {
@@ -73,6 +83,16 @@ export const useCartStore = defineStore("cart", {
             this.setCartInLocalStorage();
 
             snackbarStore().show("Item removed successfully.");
+        },
+
+        removeMultipleProducts(productIds: number[]) {
+            this.cart = this.cart.filter(
+                (product) => !productIds.includes(product.id)
+            );
+
+            this.setCartInLocalStorage();
+
+            snackbarStore().show("Item(s) removed successfully.");
         },
     },
 });

@@ -82,7 +82,7 @@
                                         >
                                             <v-btn
                                                 variant="text"
-                                                color="blue"
+                                                color="red"
                                                 icon="mdi-delete-outline"
                                                 size="small"
                                                 rounded="0"
@@ -120,8 +120,9 @@
                         <v-btn
                             block
                             size="x-large"
-                            variant="text"
-                            color="primary"
+                            variant="tonal"
+                            color="secondary"
+                            @click="navigationHelper.to('cart')"
                         >
                             View Cart
                         </v-btn>
@@ -143,6 +144,7 @@
 <script setup lang="ts">
 import { useAppStore } from '@/stores/app';
 import { useCartStore } from '@/modules/cart/config/store';
+import navigationHelper from '@/helpers/navigationHelper';
 
 const appStore = useAppStore()
 const cartStore = useCartStore()
