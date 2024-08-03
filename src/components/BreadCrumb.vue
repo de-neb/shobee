@@ -1,12 +1,15 @@
 <template>
-    <v-breadcrumbs :items="breadCrumbs">
+    <v-breadcrumbs
+        active-color="primary"
+        :items="breadCrumbs"
+    >
         <template v-slot:divider>
             <v-icon icon="mdi-chevron-right"></v-icon>
         </template>
         <template v-slot:item="{ item }">
             <v-breadcrumbs-item
                 exact
-                class="crumb-item font-weight-bold"
+                class=" font-weight-bold"
                 :disabled="item.disabled"
                 :to="item.to"
             >

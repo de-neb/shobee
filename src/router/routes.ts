@@ -8,7 +8,7 @@ export default [
                 name: "Home",
                 component: () => import("@/modules/home/views/Home.vue"),
                 meta: {
-                    breadCrumb: [{ text: "Home" }],
+                    breadCrumb: [{ text: "Home", disabled: true }],
                 },
             },
         ],
@@ -29,9 +29,11 @@ export default [
                             {
                                 text: "Home",
                                 to: { name: "Home" },
+                                disabled: false,
                             },
                             {
                                 text: name,
+                                disabled: true,
                             },
                         ];
                     },
@@ -64,9 +66,11 @@ export default [
                         {
                             text: "Home",
                             to: { name: "Home" },
+                            disabled: false,
                         },
                         {
                             text: "Cart",
+                            disabled: true,
                         },
                     ],
                 },
