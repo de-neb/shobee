@@ -2,7 +2,7 @@
   <v-sheet
     width="100%"
     height="auto"
-    class="bg-secondary pa-10"
+    class="bg-primary pa-10"
   >
     <v-container>
       <v-row justify="space-between">

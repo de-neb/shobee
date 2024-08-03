@@ -15,19 +15,19 @@ import { createVuetify, type ThemeDefinition } from "vuetify";
 const light: ThemeDefinition = {
     dark: false,
     colors: {
-        background: "#FFFFFF",
-        surface: "#FFFFFF",
-        primary: "#2B2E4A",
-        "primary-darken-1": "#192039",
-        secondary: "#E84545",
-        "secondary-darken-1": "#018786",
-        error: "#9d422c",
-        info: "#5881a6",
-        success: "#83b18f",
-        warning: "#c8a028",
-        tertiary: "#9e9fa1",
-        quartenary: "#E5E1DA",
-        cream: "#ececeb",
+        background: "#F4F6F9", // Light grey-blue background for a clean and spacious look
+        surface: "#F4F6F9", // White surface for cards and key elements
+        primary: "#0056D2", // Strong blue for primary actions and highlights
+        "primary-darken-1": "#0044A3", // Darker blue for hover states and active elements
+        secondary: "#6D28D9", // Vibrant purple for secondary actions, adding a distinctive touch
+        "secondary-darken-1": "#4B1D7C", // Darker purple for hover effects
+        error: "#D32F2F", // Bold red for error messages, providing high visibility
+        info: "#0288D1", // Bright blue for informational messages
+        success: "#4CAF50", // Fresh green for success messages
+        warning: "#FBC02D", // Warm yellow for warnings, ensuring clear visibility
+        tertiary: "#B0BEC5", // Soft grey for less prominent elements and borders
+        quaternary: "#E0E3E8", // Very light grey for subtle backgrounds and sections
+        cream: "#FFF8E1", // Soft cream for highlights or special sections
     },
 };
 

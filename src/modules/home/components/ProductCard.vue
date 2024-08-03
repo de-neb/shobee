@@ -33,31 +33,24 @@
             v-if="!horizontal"
             hover
             width="100%"
-            min-height="350"
-            elevation="2"
-            class="mx-auto"
+            height="400"
+            class="mx-auto rounded-lg"
             v-bind="props"
+            variant="text"
             @click="navigateToProduct(product.id)"
+            @mouseover="show = true"
+            @mouseleave="show = false"
         >
             <v-img
-                contain
+                cover
                 aspect-ratio="1/1"
                 width="100%"
-                height="auto"
-                min-height="200"
+                class="transition-image"
+                :class="show ? 'rounded-b-0' : 'rounded-lg'"
+                :height="show ? '250' : '300'"
                 :src="miscHelper.parsePossibleJSON(product.images[0])"
             >
-                <v-card-title class="text-right px-2">
-                    <v-btn
-                        v-if="isHovering"
-                        v-tooltip:start="'Add to cart'"
-                        icon="mdi-cart-plus"
-                        color="primary"
-                        size="small"
-                        :class="{ 'on-hover': isHovering }"
-                        @click.stop="addToCart"
-                    ></v-btn>
-                </v-card-title>
+
             </v-img>
 
             <v-card-text>
@@ -65,6 +58,22 @@
                 <h6 class="text-subtitle text-grey">{{ product.category.name }}</h6>
                 <p class="font-weight-bold">{{ product.currency }} {{ product.price }}</p>
             </v-card-text>
+
+
+            <v-expand-transition>
+                <div v-show="show">
+                    <v-card-actions>
+                        <v-btn
+                            block
+                            class="px-5"
+                            variant="outlined"
+                            color="secondary"
+                            @click.stop="addToCart"
+                        >Add to
+                            Cart</v-btn>
+                    </v-card-actions>
+                </div>
+            </v-expand-transition>
         </v-card>
 
         <!-- horizontal -->
@@ -72,7 +81,7 @@
             v-else
             hover
             height="250"
-            elevation="2"
+            variant="text"
             class="mx-auto d-flex"
             v-bind="props"
             @click="navigateToProduct(product.id)"
@@ -104,10 +113,12 @@
                 <v-card-actions>
                     <v-btn
                         size="large"
-                        class="bg-primary px-5"
-                        variant="tonal"
+                        class="px-5"
+                        variant="outlined"
+                        color="secondary"
                         @click.stop="addToCart"
-                    >Add to Cart</v-btn>
+                    >Add to
+                        Cart</v-btn>
                 </v-card-actions>
             </v-col>
 
@@ -132,6 +143,8 @@ const props = defineProps({
     }
 })
 
+const show = ref(false)
+
 const cartStore = useCartStore()
 
 const addToCart = () => {
@@ -144,4 +157,9 @@ const navigateToProduct = (id: number) => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.transition-image {
+    width: 100%;
+    transition: height 0.2s ease-in;
+}
+</style>

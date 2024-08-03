@@ -32,7 +32,7 @@
                                 v-for="product in cartStore.cart"
                                 :key="product.id"
                             >
-                                <v-list-item>
+                                <v-list-item class="px-1">
                                     <v-row
                                         class="flex-nowrap ga-1"
                                         no-gutters

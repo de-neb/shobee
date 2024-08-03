@@ -145,49 +145,45 @@
                 cols="12"
                 md="5"
                 lg="4"
+                class="flex-grow-1"
             >
+                <h3 class="text-grey">{{ productStore.viewingProduct.category?.name }}</h3>
+                <h1 class="text-h4 font-weight-black">{{ productStore.viewingProduct.title }}</h1>
+                <h2>{{ productStore.viewingProduct.currency }}{{ productStore.viewingProduct.price }}
+                </h2>
+                <p class="text-body-1 font-weight-regular text-grey">{{
+                    productStore.viewingProduct.description }}
+                </p>
+
                 <v-row
+                    no-gutters
                     justify="space-between"
-                    class="flex-column h-100"
+                    class="my-4"
                 >
-                    <v-col>
-                        <h3 class="text-grey">{{ productStore.viewingProduct.category?.name }}</h3>
-                        <h1 class="text-h4 font-weight-black">{{ productStore.viewingProduct.title }}</h1>
-                        <h2>{{ productStore.viewingProduct.currency }}{{ productStore.viewingProduct.price }}
-                        </h2>
-                        <p class="text-body-1 font-weight-regular text-grey">{{
-                            productStore.viewingProduct.description }}
-                        </p>
+
+                    <v-col cols="auto">
+                        <QuantityInput v-model="productStore.viewingProduct.order" />
                     </v-col>
 
-
-                    <v-col>
-                        <v-row>
-                            <v-col cols="4">
-                                <QuantityInput v-model="productStore.viewingProduct.order" />
-                            </v-col>
-                            <v-col cols="8">
-                                <v-btn
-                                    block
-                                    variant="outlined"
-                                    color="success"
-                                    height="48"
-                                > Add to Cart</v-btn>
-                            </v-col>
-
-                            <v-col>
-                                <v-btn
-                                    block
-                                    variant="flat"
-                                    color="primary"
-                                    size="x-large"
-                                    class="font-weight-bold"
-                                >Buy
-                                    Now</v-btn>
-                            </v-col>
-                        </v-row>
+                    <v-col cols="8">
+                        <v-btn
+                            block
+                            variant="outlined"
+                            color="secondary"
+                            height="48"
+                        > Add to Cart</v-btn>
                     </v-col>
                 </v-row>
+
+
+                <v-btn
+                    block
+                    variant="flat"
+                    color="primary"
+                    size="x-large"
+                    class="font-weight-bold"
+                >Buy
+                    Now</v-btn>
             </v-col>
 
         </v-row>
@@ -240,16 +236,6 @@ router.beforeEach(async (to, from) => {
         to.meta.productName = productStore.viewingProduct.title
     }
 })
-
-const onAppendClick = () => {
-    productStore.viewingProduct.order++
-}
-
-const onPrependClick = (e) => {
-    if (productStore.viewingProduct.order > 1) {
-        productStore.viewingProduct.order--
-    }
-}
 
 onMounted(async () => {
     await initProduct()

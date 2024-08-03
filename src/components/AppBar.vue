@@ -4,22 +4,27 @@
         extended
         extension-height="50"
         scroll-threshold="50"
-        class="bg-secondary border-white"
+        class="border-md border-primary"
     >
 
-        <v-img
-            max-width="180"
-            class="mx-10 cursor-pointer"
-            contain
-            src="../assets/logo.png"
-            @click="navigationHelper.to('home')"
+        <v-sheet
+            width="200"
+            class="mx-10 d-flex flex-nowrap align-center"
         >
-        </v-img>
+            <v-img
+                max-width="200"
+                class="cursor-pointer"
+                contain
+                src="../assets/logo.png"
+                @click="navigationHelper.to('home')"
+            >
+            </v-img>
+        </v-sheet>
 
         <v-text-field
-            class="bg-white rounded-lg ml-5"
+            class="rounded-lg ml-5"
             density="comfortable"
-            variant="flat"
+            variant="solo-inverted"
             hide-details
             prepend-inner-icon="mdi-magnify"
             placeholder="Search a product"

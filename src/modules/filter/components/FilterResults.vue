@@ -94,7 +94,7 @@ const filterBy = ref(FILTER_OPTIONS[0])
 
 const categoryProducts = ref([])
 const isLoading = ref(false)
-const isGridView = ref(0)
+const isGridView = ref(1)
 
 const initProductsByCategory = async (id: string) => {
     isLoading.value = true
