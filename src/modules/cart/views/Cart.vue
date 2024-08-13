@@ -4,7 +4,7 @@
             <BreadCrumb />
         </v-row>
 
-        <v-row>
+        <v-row v-if="cartStore.cart.length">
             <v-col
                 cols="12"
                 sm="8"
@@ -18,7 +18,7 @@
                     <v-row
                         justify="space-between"
                         align="center"
-                        class="mx-2 flex-nowrap"
+                        class="mx-1 flex-nowrap"
                     >
                         <v-col cols="auto">
                             <v-checkbox
@@ -57,6 +57,7 @@
                         <v-list-item
                             :value="product.id"
                             color="primary"
+                            class="pa-3"
                         >
                             <template v-slot:prepend="{ isActive }">
                                 <v-checkbox-btn :model-value="isActive"></v-checkbox-btn>
@@ -65,7 +66,7 @@
                             <v-row>
                                 <v-col cols="auto">
                                     <v-img
-                                        width="110"
+                                        width="100"
                                         aspect-ration="1/1"
                                         cover
                                         class="rounded"
@@ -78,8 +79,9 @@
                                         }}</v-list-item-title>
 
                                     <QuantityInput
+                                        class="mt-9"
                                         v-model="product.quantity"
-                                        width="130"
+                                        width="120"
                                         density="compact"
                                     />
                                 </v-col>
@@ -89,7 +91,8 @@
                                 </v-col>
                             </v-row>
                         </v-list-item>
-                        <v-divider></v-divider>
+
+                        <v-divider class="my-1"></v-divider>
                     </div>
                 </v-list>
             </v-col>
@@ -122,13 +125,24 @@
                             color="primary"
                             variant="flat"
                             height="50"
-                        >Proceed to Checkout</v-btn>
+                            :to="{ name: 'Checkout' }"
+                        >Proceed to
+                            Checkout</v-btn>
                     </v-card-actions>
                 </v-card>
 
             </v-col>
         </v-row>
+
+
+        <v-empty-state
+            v-else
+            title="You don’t have a product in your cart."
+            image="/src/assets/empty-bag.png"
+        ></v-empty-state>
     </v-container>
+
+
 </template>
 
 <script setup lang="ts">

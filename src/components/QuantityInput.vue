@@ -15,18 +15,18 @@
         <template #prepend-inner>
             <v-btn
                 icon="mdi-minus"
-                variant="flat"
+                variant="text"
                 :size="iconSize"
-                @click="onPrependClick"
+                @click.stop="onPrependClick"
             />
         </template>
 
         <template #append-inner>
             <v-btn
                 icon="mdi-plus"
-                variant="flat"
+                variant="text"
                 :size="iconSize"
-                @click="onAppendClick"
+                @click.stop="onAppendClick"
             />
         </template>
     </v-text-field>

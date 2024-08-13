@@ -75,6 +75,35 @@ export default [
                     ],
                 },
             },
+            {
+                path: "checkout",
+                name: "Checkout",
+                component: () => import("@/modules/cart/views/Checkout.vue"),
+                meta: {
+                    breadCrumb: [
+                        {
+                            text: "Home",
+                            to: { name: "Home" },
+                            disabled: false,
+                        },
+                        {
+                            text: "Cart",
+                            to: { name: "Cart" },
+                            disabled: false,
+                        },
+                        {
+                            text: "Checkout",
+                            disabled: true,
+                        },
+                    ],
+                },
+            },
+            {
+                path: "success",
+                name: "Success",
+                component: () => import("@/modules/cart/views/Success.vue"),
+                //todo: add route guard for success
+            },
         ],
     },
 ];

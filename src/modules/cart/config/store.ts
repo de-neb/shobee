@@ -1,21 +1,27 @@
 import { defineStore } from "pinia";
-import { CART_STORAGE_KEY } from "./constants";
+import { CART_STORAGE_KEY, defaultAddress } from "./constants";
 import { useSnackbarStore as snackbarStore } from "@/stores/snackbar";
 import miscHelper from "@/helpers/miscHelper";
 
 export const useCartStore = defineStore("cart", {
     state: () => ({
         cart: <any[]>[],
+        shippingInformation: {
+            ...defaultAddress,
+            shippingMethod: 0,
+            paymentMethod: "",
+        },
     }),
 
     getters: {
         subTotal(state) {
-            const subTotal = state.cart.reduce((acc, product) => {
-                const productTotalPrice =
-                    parseFloat(product.price) * parseInt(product.quantity);
+            const subTotal =
+                state.cart.reduce((acc, product) => {
+                    const productTotalPrice =
+                        parseFloat(product.price) * parseInt(product.quantity);
 
-                return acc + productTotalPrice;
-            }, 0);
+                    return acc + productTotalPrice;
+                }, 0) + state.shippingInformation.shippingMethod;
 
             return miscHelper.formatPrice(subTotal);
         },
@@ -30,7 +36,7 @@ export const useCartStore = defineStore("cart", {
         cartCharges(state) {
             const data = {
                 Subtotal: this.subTotal,
-                "Delivery Charges": "$0.00",
+                "Delivery Charges": state.shippingInformation.shippingMethod,
                 "Grand Total": this.subTotal,
             };
 
@@ -93,6 +99,20 @@ export const useCartStore = defineStore("cart", {
             this.setCartInLocalStorage();
 
             snackbarStore().show("Item(s) removed successfully.");
+        },
+
+        async getCountries() {
+            try {
+                const response = await fetch(
+                    "https://restcountries.com/v3.1/all"
+                );
+
+                const data = await response.json();
+
+                return data.map((country: any) => country.name.common);
+            } catch (error) {
+                snackbarStore().show("Failed to fetch countries", "error");
+            }
         },
     },
 });
