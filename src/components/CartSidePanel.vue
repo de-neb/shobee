@@ -61,7 +61,7 @@
                                                         product.title }}</p>
                                                     <p class="font-weight-medium">{{ product.currency }} {{
                                                         product.price
-                                                        }}
+                                                    }}
                                                     </p>
                                                 </v-col>
 
@@ -132,7 +132,7 @@
                 <v-col v-else>
                     <v-empty-state
                         title="Your cart is empty."
-                        image="/src/assets/empty-bag.jpeg"
+                        image="/src/assets/empty-bag.png"
                     ></v-empty-state>
                 </v-col>
             </v-row>

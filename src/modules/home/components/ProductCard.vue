@@ -160,6 +160,6 @@ const navigateToProduct = (id: number) => {
 <style scoped>
 .transition-image {
     width: 100%;
-    transition: height 0.2s ease-in;
+    transition: height 0.1s ease-in;
 }
 </style>
