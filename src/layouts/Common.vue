@@ -1,7 +1,7 @@
 <template>
     <v-app height="100%">
         <AppBar background="bg-secondary" />
-        <v-main class="d-flex justify-center h-100 w-100">
+        <v-main class="d-flex justify-center w-100 pt-0">
             <router-view></router-view>
         </v-main>
         <AppFooter />

@@ -4,7 +4,7 @@
         extended
         extension-height="50"
         scroll-threshold="50"
-        class="border-md border-primary"
+        class="border-md border-primary position-sticky"
     >
 
         <v-sheet
@@ -56,8 +56,9 @@
                 border="primary md"
                 width="100%"
                 height="100%"
-                class="px-10"
+                class="px-10 d-flex justify-center"
             >
+
                 <v-menu open-on-hover>
                     <template #activator="{ props }">
                         <v-btn
@@ -98,6 +99,7 @@
                 >
                     Daily Discover
                 </v-btn>
+
             </v-sheet>
         </template>
     </v-app-bar>

@@ -7,16 +7,13 @@
             ></v-skeleton-loader>
         </v-row>
         <v-row justify="space-between">
-            <v-card
-                v-for="card in 5"
-                :key="card"
-            >
-                <v-skeleton-loader
-                    type="card, text@3"
-                    width="300"
-                >
-                </v-skeleton-loader>
-            </v-card>
+            <v-skeleton-loader
+                v-for="skeleton in 5"
+                :key="skeleton"
+                class="mb-3 mx-2 rounded"
+                type="image@2, text@3"
+                width="400"
+            ></v-skeleton-loader>
         </v-row>
     </template>
 
@@ -37,7 +34,7 @@
             >
                 <ProductCard
                     :product="product"
-                    :loading="productStore.loading"
+                    :loading="productStore.loading || isLoading"
                 />
             </v-col>
         </v-row>

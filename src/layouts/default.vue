@@ -4,14 +4,11 @@
   <v-app>
     <AppBar background="bg-primary" />
     <v-sheet
-      width="95%"
-      class="mx-auto pt-15"
+      width="100%"
+      class="mx-auto"
     >
-      <div class="pt-15 mt-5">
-      </div>
       <v-carousel
-        height="500"
-        class="rounded-xl"
+        height="600"
         show-arrows="hover"
         cycle
         hide-delimiter-background
@@ -43,7 +40,7 @@
         </v-carousel-item>
       </v-carousel>
     </v-sheet>
-    <v-main class="d-flex h-100 w-100">
+    <v-main class="d-flex w-100">
       <router-view></router-view>
     </v-main>
     <AppFooter />

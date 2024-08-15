@@ -2,7 +2,6 @@
     <!-- skeleton loader-->
     <v-container
         v-if="productStore.loading"
-        class="pt-15"
         fluid
     >
         <v-sheet height="700">
@@ -26,10 +25,7 @@
                     ></v-skeleton-loader>
                 </v-col>
                 <v-col cols="4">
-                    <v-skeleton-loader
-                        type="image"
-                        height="100%"
-                    ></v-skeleton-loader>
+                    <v-skeleton-loader type="image@4"></v-skeleton-loader>
                 </v-col>
                 <v-col cols="4">
                     <v-skeleton-loader
@@ -50,7 +46,7 @@
                     ></v-skeleton-loader>
                     <v-skeleton-loader
                         type="button"
-                        width="100%"
+                        width="500"
                     ></v-skeleton-loader>
                 </v-col>
             </v-row>
@@ -59,7 +55,7 @@
 
     <v-container
         v-else
-        class="pt-10 d-flex flex-column"
+        class="d-flex flex-column"
         fluid
     >
         <!-- bread crumbs -->

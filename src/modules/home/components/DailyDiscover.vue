@@ -12,6 +12,7 @@
         @load="onLoad"
         width="100%"
         class="overflow-hidden"
+        empty-text=""
     >
         <v-row
             justify="start"

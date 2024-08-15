@@ -1,10 +1,12 @@
 <template>
     <template v-if="loading">
-        <v-skeleton-loader
-            v-if="!horizontal"
-            type="card, text@3"
-            :elevation="2"
-        ></v-skeleton-loader>
+        <v-row v-if="!horizontal">
+            <v-skeleton-loader
+                class="mb-3 mx-2 rounded"
+                type="image@2, text@3"
+                width="400"
+            ></v-skeleton-loader>
+        </v-row>
 
         <v-row v-else>
             <v-col cosl="3">

@@ -1,8 +1,10 @@
 <template>
-  <v-sheet
+  <v-footer
     width="100%"
     height="auto"
     class="bg-primary pa-10"
+    order="-1"
+    app
   >
     <v-container>
       <v-row justify="space-between">
@@ -51,7 +53,7 @@
         <v-col cols="auto"> <span>© Copyright {{ year }}</span></v-col>
       </v-row>
     </v-container>
-  </v-sheet>
+  </v-footer>
 </template>
 
 <script setup lang="ts">
