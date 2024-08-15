@@ -106,4 +106,8 @@ export default [
             },
         ],
     },
+    {
+        path: "/:pathMatch(.*)",
+        component: () => import("@/modules/404/views/PageNotFound.vue"),
+    },
 ];
