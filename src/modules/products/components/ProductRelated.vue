@@ -16,8 +16,9 @@
             <v-skeleton-loader
                 v-for="card in 5"
                 :key="card"
-                type="card"
-                width="200"
+                class="mx-2"
+                type="image@2, text@2"
+                width="350"
             ></v-skeleton-loader>
         </v-row>
     </v-container>
