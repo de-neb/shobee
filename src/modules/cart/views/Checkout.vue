@@ -103,7 +103,7 @@
                         <v-expansion-panel
                             title="Payment Method"
                             value="payment"
-                            v-show="showShipping && cartStore.shippingInformation.shippingMethod >= 0"
+                            v-show="showShipping && cartStore.shippingInformation.shippingMethod > -1"
                         >
                             <v-expansion-panel-text>
                                 <v-radio-group
@@ -232,6 +232,7 @@ onMounted(async () => {
 
 onUnmounted(() => {
     showShipping.value = false
+    cartStore.shippingMethod = null
 })
 </script>
 

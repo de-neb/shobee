@@ -8,7 +8,7 @@ export const useCartStore = defineStore("cart", {
         cart: <any[]>[],
         shippingInformation: {
             ...defaultAddress,
-            shippingMethod: 0,
+            shippingMethod: <number | null>null,
             paymentMethod: "",
         },
     }),
