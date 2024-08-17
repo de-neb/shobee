@@ -150,7 +150,7 @@ const show = ref(false)
 const cartStore = useCartStore()
 
 const addToCart = () => {
-    cartStore.updateCartInLocalStorage(props.product)
+    cartStore.updateCartInLocalStorage({ ...props.product, quantity: 1 })
 }
 
 const navigateToProduct = (id: number) => {

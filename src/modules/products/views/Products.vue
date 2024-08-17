@@ -158,7 +158,7 @@
                 >
 
                     <v-col cols="auto">
-                        <QuantityInput v-model="productStore.viewingProduct.order" />
+                        <QuantityInput v-model="productStore.viewingProduct.quantity" />
                     </v-col>
 
                     <v-col cols="8">
@@ -167,6 +167,7 @@
                             variant="outlined"
                             color="secondary"
                             height="48"
+                            @click="addToCart"
                         > Add to Cart</v-btn>
                     </v-col>
                 </v-row>
@@ -204,17 +205,18 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify';
 import { useProductStore } from '../config/store';
+import { useCartStore } from '@/modules/cart/config/store';
 import router from '@/router'
 import ProductRelated from '../components/ProductRelated.vue'
 
 const productStore = useProductStore()
+const cartStore = useCartStore()
 const { smAndDown } = useDisplay()
 
 const previewImage = ref('')
 const activePreviewImageIndex = ref(0)
 
 const categoryId = computed(() => productStore.viewingProduct?.category?.id)
-
 
 const initProduct = async () => {
     const id = router.currentRoute.value.params.id
@@ -223,6 +225,11 @@ const initProduct = async () => {
 
 const onCarouselSlide = (index: number) => {
     activePreviewImageIndex.value = index
+}
+
+const addToCart = () => {
+    cartStore.updateProductQuantityInCart(productStore.viewingProduct)
+    productStore.viewingProduct.quantity = 1
 }
 
 router.beforeEach(async (to, from) => {

@@ -54,10 +54,7 @@ export const useCartStore = defineStore("cart", {
 
             if (!this.cart || !this.cart.length) {
                 data.quantity = 1;
-
                 this.cart.push(data);
-
-                this.setCartInLocalStorage();
             } else {
                 // check if the same product was already added in the cart
                 const existingProductIndex = this.cart.findIndex(
@@ -67,14 +64,31 @@ export const useCartStore = defineStore("cart", {
                 if (existingProductIndex > -1) {
                     this.cart[existingProductIndex].quantity += 1;
                 } else {
-                    data.quantity = 1;
                     this.cart.push(data);
                 }
-
-                this.setCartInLocalStorage();
             }
 
+            this.setCartInLocalStorage();
+
             snackbarStore().show(`${data.title} added successfully.`);
+        },
+
+        updateProductQuantityInCart(data: any) {
+            if (!this.cart.length) {
+                this.cart.push(data);
+                snackbarStore().show("Cart updated successfully.");
+                return;
+            }
+
+            for (const product of this.cart) {
+                if (product.id === data.id) {
+                    product.quantity += data.quantity;
+                    snackbarStore().show("Cart updated successfully.");
+                }
+                return;
+            }
+
+            this.setCartInLocalStorage();
         },
 
         getCartFromLocalStorage() {
