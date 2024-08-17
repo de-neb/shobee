@@ -45,10 +45,11 @@
 import { useProductStore } from "@/modules/products/config/store";
 import helper from "../config/helper";
 import ProductCard from "./ProductCard.vue";
+import { Product } from "@/shared/types";
 
 const productStore = useProductStore();
 
-const topProducts = ref([])
+const topProducts = ref<Product[]>([])
 const isLoading = ref(true)
 
 const getRandomTopProducts = async () => {

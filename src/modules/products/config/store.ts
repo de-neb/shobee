@@ -1,15 +1,16 @@
 // Utilities
 import { defineStore } from "pinia";
-import service from "./api";
 import { DEFAULT_CURRENCY } from "./contants";
+import { Product } from "@/shared/types";
 import router from "@/router";
+import service from "./api";
 
 export const useProductStore = defineStore("product", {
     state: () => ({
-        products: [],
+        products: <Product[]>[],
         loading: false,
-        viewingProduct: {
-            order: 0,
+        viewingProduct: <Product>{
+            quantity: 1,
         },
         priceRange: <number[]>[],
     }),
@@ -20,7 +21,7 @@ export const useProductStore = defineStore("product", {
                 this.loading = true;
                 const { data } = await service.getProducts(params);
 
-                this.products = data.map((row) => ({
+                this.products = data.map((row: Product) => ({
                     ...row,
                     currency: DEFAULT_CURRENCY,
                 }));
@@ -37,7 +38,7 @@ export const useProductStore = defineStore("product", {
                 const { data } = await service.getProductById(id);
                 data.currency = DEFAULT_CURRENCY;
 
-                this.viewingProduct = { ...this.viewingProduct, ...data };
+                this.viewingProduct = { quantity: 1, ...data };
 
                 return data;
             } finally {
@@ -54,7 +55,7 @@ export const useProductStore = defineStore("product", {
 
             const { data } = await service.getProducts(params);
 
-            const products = data.map((row) => ({
+            const products = data.map((row: Product) => ({
                 ...row,
                 currency: DEFAULT_CURRENCY,
             }));

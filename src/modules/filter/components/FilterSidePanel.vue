@@ -67,7 +67,7 @@ const opened = ref(['Category', 'Price'])
 const currentCategory = ref<any[]>([])
 const categoryId = computed(() => router.currentRoute.value.params.id as string)
 
-const assignCurrentCategory = (id: string | number) => {
+const assignCurrentCategory = (id: string) => {
     currentCategory.value = [parseInt(id)]
 }
 

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Category } from "./types";
+import { Category } from "@/shared/types";
 import service from "./api";
 
 export const useHomeStore = defineStore("home", {

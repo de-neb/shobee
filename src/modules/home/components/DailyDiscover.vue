@@ -40,13 +40,14 @@
 <script setup lang="ts">
 import { useProductStore } from "@/modules/products/config/store";
 import ProductCard from "./ProductCard.vue";
+import { Product } from "@/shared/types";
 
 const productStore = useProductStore();
 
-const infiniteProducts = ref([])
+const infiniteProducts = ref<Product[]>([])
 const offset = ref(10)
 const infiniteLoading = ref(false)
-const onLoad = async ({ done }) => {
+const onLoad = async ({ done }: { done: Function }) => {
     infiniteLoading.value = true
     const data = await productStore.getProducts({
         offset: offset.value,

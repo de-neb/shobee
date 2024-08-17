@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import router from '@/router'
 import FilterSidePanel from '../components/FilterSidePanel.vue';
 import FilterResults from '../components/FilterResults.vue';
 

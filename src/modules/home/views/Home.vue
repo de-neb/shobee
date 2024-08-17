@@ -1,5 +1,4 @@
 <template>
-
     <v-container>
         <v-sheet id="topProducts">
             <TopProducts />
