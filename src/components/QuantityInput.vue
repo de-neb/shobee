@@ -4,7 +4,7 @@
         hide-spin-buttons
         readonly
         type="number"
-        min="0"
+        min="1"
         max="99"
         variant="outlined"
         v-model="quantity"
@@ -55,10 +55,16 @@ const props = defineProps({
 const quantity = ref(1)
 
 const onAppendClick = () => {
+    if (quantity.value >= 99) {
+        return
+    }
     quantity.value++
 }
 
 const onPrependClick = () => {
+    if (quantity.value <= 1) {
+        return
+    }
     quantity.value--
 }
 
