@@ -43,11 +43,11 @@ export default [
     },
     {
         path: "/category",
-        name: "Filter",
         component: () => import("@/layouts/Common.vue"),
         children: [
             {
                 path: ":id",
+                name: "Category",
                 component: () => import("@/modules/filter/views/Filter.vue"),
                 meta: {},
             },

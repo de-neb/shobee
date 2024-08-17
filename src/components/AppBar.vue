@@ -1,10 +1,10 @@
 <template>
     <v-app-bar
         border
-        extended
-        extension-height="50"
         scroll-threshold="50"
         class="border-md border-primary position-sticky"
+        :extended="!isCategoryPage"
+        :extension-height="isCategoryPage ? 0 : 50"
     >
 
         <v-sheet
@@ -12,7 +12,7 @@
             class="mx-10 d-flex flex-nowrap align-center"
         >
             <v-img
-                max-width="200"
+                max-width="180"
                 class="cursor-pointer"
                 contain
                 src="../assets/logo.png"
@@ -24,7 +24,8 @@
         <v-text-field
             class="rounded-lg ml-5"
             density="comfortable"
-            variant="solo-inverted"
+            variant="solo"
+            elevation="0"
             hide-details
             prepend-inner-icon="mdi-magnify"
             placeholder="Search a product"
@@ -51,7 +52,11 @@
             </v-btn>
         </div>
 
-        <template #extension>
+
+        <template
+            v-if="!isCategoryPage"
+            #extension
+        >
             <v-sheet
                 border="primary md"
                 width="100%"
@@ -87,7 +92,7 @@
                     height="100%"
                     value="two"
                     tag="a"
-                    href="#topProducts"
+                    @click="navigationHelper.to('Home', { hash: '#topProducts' })"
                 >
                     Top Products </v-btn>
 
@@ -95,7 +100,7 @@
                     height="100%"
                     value="two"
                     tag="a"
-                    href="#dailyDiscover"
+                    @click="navigationHelper.to('Home', { hash: '#dailyDiscover' })"
                 >
                     Daily Discover
                 </v-btn>
@@ -123,10 +128,18 @@ const homeStore = useHomeStore()
 const cartStore = useCartStore()
 const appStore = useAppStore()
 
+
+const isCategoryPage = computed(() => navigationHelper.getCurrentRouteName() === 'Category')
+
 onMounted(() => {
     homeStore.loadAllCategories()
 })
 
+onBeforeMount(() => {
+    console.log('get curr route', navigationHelper.getCurrentRouteName())
+
+    console.log('iscatego', navigationHelper.isCurrentRouteCategory)
+})
 </script>
 
 <style scoped>
