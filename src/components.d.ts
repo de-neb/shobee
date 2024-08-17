@@ -9,9 +9,12 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppBar: typeof import('./components/AppBar.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
+    BreadCrumb: typeof import('./components/BreadCrumb.vue')['default']
+    CartSidePanel: typeof import('./components/CartSidePanel.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     HomeCarousel: typeof import('./components/Home/HomeCarousel.vue')['default']
     ProductCard: typeof import('./components/ProductCard.vue')['default']
+    QuantityInput: typeof import('./components/QuantityInput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Snackbar: typeof import('./components/Snackbar.vue')['default']

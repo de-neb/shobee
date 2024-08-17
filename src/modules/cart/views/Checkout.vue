@@ -6,7 +6,10 @@
         </v-row>
 
         <v-row justify="space-between">
-            <v-col cols="7">
+            <v-col
+                cols="12"
+                md="7"
+            >
                 <v-expansion-panels
                     multiple
                     elevation="0"
@@ -142,7 +145,10 @@
                 </v-expansion-panels>
             </v-col>
 
-            <v-col cols="4">
+            <v-col
+                cols="12"
+                md="4"
+            >
                 <v-card variant="flat">
                     <v-card-title class="text-h5">Cart Summary</v-card-title>
 
@@ -153,16 +159,19 @@
                                 :key="product.id"
                                 class="pa-0 pb-4"
                             >
-                                <v-row>
-                                    <v-col cols="2">
+                                <v-row
+                                    no-gutters
+                                    class="ga-2"
+                                >
+                                    <v-col cols="3">
                                         <v-img
                                             class="rounded"
                                             :src="product.images[0]"
                                         ></v-img>
                                     </v-col>
 
-                                    <v-col cols="auto">
-                                        <p>{{ product.title }}</p>
+                                    <v-col cols="8">
+                                        <p class="text-break">{{ product.title }}</p>
                                         <h3>{{ miscHelper.formatPrice(product.price) }} x {{ product.quantity }}</h3>
                                     </v-col>
                                 </v-row>
