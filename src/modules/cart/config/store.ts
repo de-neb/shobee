@@ -2,10 +2,11 @@ import { defineStore } from "pinia";
 import { CART_STORAGE_KEY, defaultAddress } from "./constants";
 import { useSnackbarStore as snackbarStore } from "@/stores/snackbar";
 import miscHelper from "@/helpers/miscHelper";
+import { Product } from "@/shared/types";
 
 export const useCartStore = defineStore("cart", {
     state: () => ({
-        cart: <any[]>[],
+        cart: <Product[]>[],
         shippingInformation: {
             ...defaultAddress,
             shippingMethod: <number | null>null,
@@ -28,7 +29,7 @@ export const useCartStore = defineStore("cart", {
 
         cartItemsTotal(state) {
             return state.cart.reduce(
-                (acc, product) => acc + product.quantity,
+                (acc, product) => acc + product.quantity!,
                 0
             );
         },
@@ -49,7 +50,7 @@ export const useCartStore = defineStore("cart", {
             localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(this.cart));
         },
 
-        updateCartInLocalStorage(data: any) {
+        updateCartInLocalStorage(data: Product) {
             this.getCartFromLocalStorage();
 
             if (!this.cart || !this.cart.length) {
@@ -73,20 +74,18 @@ export const useCartStore = defineStore("cart", {
             snackbarStore().show(`${data.title} added successfully.`);
         },
 
-        updateProductQuantityInCart(data: any) {
-            if (!this.cart.length) {
+        updateProductQuantityInCart(data: Product) {
+            const existingProductIndex = this.cart.findIndex(
+                (product) => product.id === data.id
+            );
+
+            if (existingProductIndex > -1) {
+                this.cart[existingProductIndex].quantity += data.quantity;
+            } else {
                 this.cart.push(data);
-                snackbarStore().show("Cart updated successfully.");
-                return;
             }
 
-            for (const product of this.cart) {
-                if (product.id === data.id) {
-                    product.quantity += data.quantity;
-                    snackbarStore().show("Cart updated successfully.");
-                }
-                return;
-            }
+            snackbarStore().show("Cart updated successfully.");
 
             this.setCartInLocalStorage();
         },
@@ -97,7 +96,7 @@ export const useCartStore = defineStore("cart", {
             );
         },
 
-        removeProduct(id: string) {
+        removeProduct(id: string | number) {
             this.cart = this.cart.filter((product) => product.id !== id);
 
             this.setCartInLocalStorage();
@@ -113,6 +112,11 @@ export const useCartStore = defineStore("cart", {
             this.setCartInLocalStorage();
 
             snackbarStore().show("Item(s) removed successfully.");
+        },
+
+        clearCart() {
+            this.cart = [];
+            this.setCartInLocalStorage();
         },
 
         async getCountries() {

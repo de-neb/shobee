@@ -179,6 +179,7 @@
                     color="primary"
                     size="x-large"
                     class="font-weight-bold"
+                    @click="buyNow"
                 >Buy
                     Now</v-btn>
             </v-col>
@@ -228,8 +229,13 @@ const onCarouselSlide = (index: number) => {
 }
 
 const addToCart = () => {
-    cartStore.updateProductQuantityInCart(productStore.viewingProduct)
+    cartStore.updateProductQuantityInCart({ ...productStore.viewingProduct })
     productStore.viewingProduct.quantity = 1
+}
+
+const buyNow = () => {
+    addToCart()
+    router.push({ name: 'Checkout' })
 }
 
 router.beforeEach(async (to, from) => {

@@ -9,7 +9,7 @@ export default {
         });
     },
 
-    getProductById(id: number) {
+    getProductById(id: string) {
         return serviceHelper({
             url: `products/${id}`,
             method: "get",

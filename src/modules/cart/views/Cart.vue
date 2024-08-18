@@ -134,7 +134,6 @@
             </v-col>
         </v-row>
 
-
         <v-empty-state
             v-else
             title="You don’t have a product in your cart."
@@ -142,14 +141,15 @@
         ></v-empty-state>
     </v-container>
 
-
 </template>
 
 <script setup lang="ts">
 import miscHelper from '@/helpers/miscHelper';
 import { useCartStore } from '../config/store';
+import { useAppStore } from '@/stores/app';
 
 const cartStore = useCartStore()
+const appStore = useAppStore()
 
 const productIds = ref<number[]>([])
 
@@ -165,6 +165,10 @@ const handleRemove = () => {
     cartStore.removeMultipleProducts(productIds.value)
     productIds.value = []
 }
+
+onMounted(() => {
+    appStore.isCartSidePanelOpen = false
+})
 </script>
 
 <style scoped></style>

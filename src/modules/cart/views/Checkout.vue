@@ -149,7 +149,10 @@
                 cols="12"
                 md="4"
             >
-                <v-card variant="flat">
+                <v-card
+                    variant="flat"
+                    class="h-100 position-sticky"
+                >
                     <v-card-title class="text-h5">Cart Summary</v-card-title>
 
                     <v-card-text class="cart-summary-items">
@@ -203,6 +206,7 @@
                             height="50"
                             v-if="cartStore.shippingInformation.paymentMethod"
                             :to="{ name: 'Success' }"
+                            @click="cartStore.clearCart"
                         >Place Order</v-btn>
                     </v-card-actions>
                 </v-card>
@@ -212,13 +216,15 @@
 </template>
 
 <script setup lang="ts">
-import { ADDRESS_FIELDS, PAYMENT_OPTIONS, SHIPPING_OPTIONS } from '../config/constants.ts'
+import { ADDRESS_FIELDS, PAYMENT_OPTIONS, SHIPPING_OPTIONS } from '../config/constants'
 import rules from '@/shared/rules'
 import miscHelper from '@/helpers/miscHelper'
 import filter from '@/shared/filter'
 import { useCartStore } from '../config/store'
+import { useAppStore } from '@/stores/app.js'
 
 const cartStore = useCartStore()
+const appStore = useAppStore()
 
 const expanded = ref(['address'])
 const countries = ref<string[]>([])
@@ -237,11 +243,12 @@ const onProceed = async () => {
 
 onMounted(async () => {
     countries.value = await cartStore.getCountries()
+    appStore.isCartSidePanelOpen = false
 })
 
 onUnmounted(() => {
     showShipping.value = false
-    cartStore.shippingMethod = null
+    cartStore.shippingInformation.shippingMethod = null
 })
 </script>
 
