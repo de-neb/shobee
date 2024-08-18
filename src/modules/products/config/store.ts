@@ -32,7 +32,7 @@ export const useProductStore = defineStore("product", {
             }
         },
 
-        async getProductById(id: number) {
+        async getProductById(id: string) {
             try {
                 this.loading = true;
                 const { data } = await service.getProductById(id);
@@ -46,12 +46,16 @@ export const useProductStore = defineStore("product", {
             }
         },
 
-        async filterProducts(id: string) {
-            const params = {
+        async filterProducts(id: string, title: string | null = null) {
+            const params: any = {
                 categoryId: id ?? router.currentRoute.value.params.id,
                 price_min: this.priceRange[0],
                 price_max: this.priceRange[1],
             };
+
+            if (title) {
+                params.title = title;
+            }
 
             const { data } = await service.getProducts(params);
 

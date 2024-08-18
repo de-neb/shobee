@@ -54,6 +54,17 @@ export default [
         ],
     },
     {
+        path: "/search",
+        component: () => import("@/layouts/Common.vue"),
+        children: [
+            {
+                path: "",
+                name: "Search",
+                component: () => import("@/modules/filter/views/Filter.vue"),
+            },
+        ],
+    },
+    {
         path: "/cart",
         component: () => import("@/layouts/Common.vue"),
         children: [

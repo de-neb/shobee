@@ -114,6 +114,7 @@
                             size="x-large"
                             variant="flat"
                             color="primary"
+                            @click="navigationHelper.to('checkout')"
                         >
                             Continue to Checkout
                         </v-btn>

@@ -21,22 +21,28 @@
             </v-img>
         </v-sheet>
 
-        <v-text-field
-            class="rounded-lg ml-5"
-            density="comfortable"
-            variant="solo"
-            elevation="0"
-            hide-details
-            prepend-inner-icon="mdi-magnify"
-            placeholder="Search a product"
-            max-width="350"
-        ></v-text-field>
+        <v-form
+            @submit.prevent="onSearch"
+            class="w-auto"
+        >
+            <v-text-field
+                hide-details
+                class="rounded-lg ml-5 border border-primary"
+                density="compact"
+                variant="outlined"
+                prepend-inner-icon="mdi-magnify"
+                placeholder="Search a product"
+                width="300"
+                v-model="searchItem"
+                @click:prependInner="onSearch"
+            ></v-text-field>
+        </v-form>
 
         <v-spacer></v-spacer>
 
         <div class="mx-10 d-flex align-center">
 
-            <p>{{ cartStore.subTotal }}</p>
+            <p class="font-weight-bold mx-2">{{ cartStore.subTotal }}</p>
 
             <v-btn
                 class="text-none"
@@ -128,18 +134,21 @@ const homeStore = useHomeStore()
 const cartStore = useCartStore()
 const appStore = useAppStore()
 
-
 const isCategoryPage = computed(() => navigationHelper.getCurrentRouteName() === 'Category')
+
+const searchItem = ref("")
+const onSearch = async () => {
+    if (searchItem.value && searchItem.value.length < 4) {
+        return
+    }
+
+    navigationHelper.to('search', { query: { title: searchItem.value } })
+}
 
 onMounted(() => {
     homeStore.loadAllCategories()
 })
 
-onBeforeMount(() => {
-    console.log('get curr route', navigationHelper.getCurrentRouteName())
-
-    console.log('iscatego', navigationHelper.isCurrentRouteCategory)
-})
 </script>
 
 <style scoped>

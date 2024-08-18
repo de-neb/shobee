@@ -12,7 +12,6 @@ export const useHomeStore = defineStore("home", {
             try {
                 const { data } = await service.getAllCategories(limit);
                 this.categories = data;
-                console.log(this.categories);
             } catch (error) {}
         },
     },

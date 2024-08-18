@@ -1,5 +1,5 @@
 <template>
-    <v-container class="py-8 h-100">
+    <v-container class="pb-8 h-100">
         <v-row
             v-if="!categoryProducts.length && !isLoading"
             align="center"
@@ -87,18 +87,32 @@ import { useProductStore } from '@/modules/products/config/store';
 import helper from '../config/helper';
 import router from '@/router'
 import ProductCard from '@/modules/home/components/ProductCard.vue';
+import { Product } from '@/shared/types';
 
 const productStore = useProductStore()
 
 const filterBy = ref(FILTER_OPTIONS[0])
 
-const categoryProducts = ref([])
+const categoryProducts = ref<Product[]>([])
 const isLoading = ref(false)
 const isGridView = ref(1)
 
 const initProductsByCategory = async (id: string) => {
     isLoading.value = true
     categoryProducts.value = await productStore.filterProducts(id)
+    isLoading.value = false
+}
+
+const handleOnMounted = async () => {
+    isLoading.value = true
+
+    const query = router.currentRoute.value.query
+    if (router.currentRoute.value.name === 'Search' && Object.hasOwn(query, 'title')) {
+        categoryProducts.value = await productStore.getProducts({ title: query.title })
+    } else {
+        initProductsByCategory(router.currentRoute.value.params.id as string)
+    }
+
     isLoading.value = false
 }
 
@@ -111,17 +125,20 @@ const handleFilter = (value: string) => {
 }
 
 router.afterEach((to) => {
-    initProductsByCategory(to.params.id as string)
+    handleOnMounted()
 })
 
 watch(() => productStore.priceRange, async () => {
     isLoading.value = true
-    categoryProducts.value = await productStore.filterProducts(router.currentRoute.value.params.id as string)
+
+    const title = router.currentRoute.value.query?.title as any
+    categoryProducts.value = await productStore.filterProducts(router.currentRoute.value.params.id as string, title)
+
     isLoading.value = false
 })
 
 onMounted(() => {
-    initProductsByCategory(router.currentRoute.value.params.id as string)
+    handleOnMounted()
 })
 
 </script>
