@@ -9,6 +9,7 @@
         </v-main>
         <AppFooter />
     </v-app>
+    <MenuSidePanel />
     <CartSidePanel ref="cartSidePanel" />
     <Snackbar />
 </template>

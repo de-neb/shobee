@@ -9,10 +9,16 @@
         </v-row>
 
         <v-row v-else>
-            <v-col cosl="3">
+            <v-col
+                cosl="6"
+                md="3"
+            >
                 <v-skeleton-loader type="image"></v-skeleton-loader>
             </v-col>
-            <v-col cols="9">
+            <v-col
+                cols="6"
+                md="9"
+            >
                 <v-skeleton-loader
                     type="heading"
                     width="400"
@@ -82,15 +88,16 @@
         <v-card
             v-else
             hover
-            height="250"
+            height="auto"
             variant="text"
-            class="mx-auto d-flex"
+            class="mx-auto d-flex flex-wrap"
             v-bind="props"
             @click="navigateToProduct(product.id)"
         >
 
             <v-col
-                cols="3"
+                cols="6"
+                md="3"
                 align-self="center"
                 class="pa-0"
             >
@@ -103,7 +110,8 @@
             </v-col>
 
             <v-col
-                cols="9"
+                cols="6"
+                md="9"
                 class="py-0"
             >
                 <v-card-text class="d-flex ga-3 flex-column">

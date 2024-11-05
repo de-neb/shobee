@@ -1,6 +1,6 @@
 <template>
   <CartSidePanel ref="cartSidePanel" />
-
+  <MenuSidePanel />
   <v-app>
     <AppBar background="bg-primary" />
     <v-sheet
@@ -8,7 +8,7 @@
       class="mx-auto"
     >
       <v-carousel
-        height="600"
+        height="500"
         show-arrows="hover"
         cycle
         hide-delimiter-background

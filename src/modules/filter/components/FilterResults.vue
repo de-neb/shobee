@@ -7,14 +7,14 @@
         >
             <v-empty-state
                 class="mx-auto"
-                headline="Oops! We Couldn't Find What You're Looking For"
+                title="Oops! We Couldn't Find What You're Looking For"
                 text="We’ve searched high and low, but it looks like we don’t have the product you’re looking for right now."
             >
                 <template v-slot:media>
                     <v-img
                         width="300"
                         height="300"
-                        class="mx-auto mb-5"
+                        class="mx-auto mb-10"
                         src="/src/assets/product_not_found.png"
                     ></v-img>
                 </template>
@@ -24,7 +24,11 @@
 
         <template v-else>
             <v-row justify="space-between">
-                <v-col cols="2">
+                <v-col
+                    cols="6"
+                    sm="6"
+                    md="4"
+                >
                     <v-select
                         hide-details
                         variant="outlined"
@@ -36,7 +40,8 @@
                 </v-col>
 
                 <v-col
-                    cols="2"
+                    cols="4"
+                    sm="4"
                     align-self="center"
                 >
                     <v-item-group
@@ -67,7 +72,9 @@
                     cols="12"
                     v-for="product in categoryProducts"
                     :key="product.id"
-                    :sm="isGridView ? 3 : 12"
+                    :sm="isGridView ? 6 : 12"
+                    :md="isGridView ? 4 : 12"
+                    :lg="isGridView ? 3 : 12"
                 >
                     <ProductCard
                         :horizontal="!isGridView"
@@ -84,12 +91,15 @@
 <script setup lang="ts">
 import { FILTER_OPTIONS } from '../config/constants';
 import { useProductStore } from '@/modules/products/config/store';
+import { useDisplay } from 'vuetify';
 import helper from '../config/helper';
 import router from '@/router'
 import ProductCard from '@/modules/home/components/ProductCard.vue';
 import { Product } from '@/shared/types';
 
 const productStore = useProductStore()
+
+const { xs, mdAndDown } = useDisplay()
 
 const filterBy = ref(FILTER_OPTIONS[0])
 

@@ -3,25 +3,28 @@
         border
         scroll-threshold="50"
         class="border-md border-primary position-sticky"
-        :extended="!isCategoryPage"
-        :extension-height="isCategoryPage ? 0 : 50"
+        :extended="!isCategoryPage && !xs"
+        :extension-height="50"
     >
+        <v-btn
+            v-if="xs"
+            icon="mdi-menu"
+            variant="text"
+            color="primary"
+            @click="appStore.isMenuSidePanelOpen = !appStore.isMenuSidePanelOpen"
+        ></v-btn>
 
-        <v-sheet
-            width="200"
-            class="mx-10 d-flex flex-nowrap align-center"
+        <v-img
+            max-width="180"
+            class="cursor-pointer"
+            contain
+            src="../assets/logo.png"
+            @click="navigationHelper.to('home')"
         >
-            <v-img
-                max-width="180"
-                class="cursor-pointer"
-                contain
-                src="../assets/logo.png"
-                @click="navigationHelper.to('home')"
-            >
-            </v-img>
-        </v-sheet>
+        </v-img>
 
         <v-form
+            v-if="!xs"
             @submit.prevent="onSearch"
             class="w-auto"
         >
@@ -40,7 +43,7 @@
 
         <v-spacer></v-spacer>
 
-        <div class="mx-10 d-flex align-center">
+        <div class=" d-flex align-center">
 
             <p class="font-weight-bold mx-2">{{ cartStore.subTotal }}</p>
 
@@ -50,77 +53,98 @@
                 @click="appStore.toggleCartSidePanel"
             >
                 <v-badge
-                    color="info"
+                    color="primary"
                     :content="cartStore.cartItemsTotal"
                 >
-                    <v-icon>mdi-cart</v-icon>
+                    <v-icon>mdi-cart-outline</v-icon>
                 </v-badge>
             </v-btn>
         </div>
 
 
         <template
-            v-if="!isCategoryPage"
+            v-if="!isCategoryPage && !xs"
             #extension
         >
-            <v-sheet
-                border="primary md"
-                width="100%"
-                height="100%"
-                class="px-10 d-flex justify-center"
-            >
-
-                <v-menu open-on-hover>
-                    <template #activator="{ props }">
-                        <v-btn
-                            height="100%"
-                            value="one"
-                            v-bind="props"
-                        >Categories <v-icon icon="mdi-chevron-down"></v-icon></v-btn>
-                    </template>
-
-                    <v-list>
-                        <v-list-item
-                            class="px-3"
-                            v-for="category in homeStore.categories"
-                            :key="category.id"
-                            :value="category.id"
-                            :to="`/category/${category.id}`"
-                        >
-                            <v-list-item-title class="text-capitalize">
-                                {{ category.name }}
-                            </v-list-item-title>
-                        </v-list-item>
-                    </v-list>
-                </v-menu>
-
-                <v-btn
-                    height="100%"
-                    value="two"
-                    tag="a"
-                    @click="navigationHelper.to('Home', { hash: '#topProducts' })"
+            <div class="d-flex align-start justify-start flex-column ga-3 w-100">
+                <v-form
+                    @submit.prevent="onSearch"
+                    class="w-100 ga-2 d-flex justify-space-between"
+                    v-if="xs"
                 >
-                    Top Products </v-btn>
+                    <v-text-field
+                        hide-details
+                        class="rounded-lg  border border-primary"
+                        density="compact"
+                        variant="outlined"
+                        prepend-inner-icon="mdi-magnify"
+                        placeholder="Search a product"
+                        v-model="searchItem"
+                        @click:prependInner="onSearch"
+                    >
+                    </v-text-field>
+                </v-form>
 
-                <v-btn
-                    height="100%"
-                    value="two"
-                    tag="a"
-                    @click="navigationHelper.to('Home', { hash: '#dailyDiscover' })"
+                <v-sheet
+                    width="100%"
+                    class="d-flex flex-wrap flex-row justify-space-around justify-sm-center align-stretch"
                 >
-                    Daily Discover
-                </v-btn>
 
-            </v-sheet>
+                    <v-menu open-on-hover>
+                        <template #activator="{ props }">
+                            <v-btn
+                                height="100%"
+                                value="one"
+                                class="pa-3"
+                                v-bind="props"
+                            >Categories <v-icon icon="mdi-chevron-down"></v-icon></v-btn>
+                        </template>
+
+                        <v-list>
+                            <v-list-item
+                                class="px-3"
+                                v-for="category in homeStore.categories"
+                                :key="category.id"
+                                :value="category.id"
+                                :to="`/category/${category.id}`"
+                            >
+                                <v-list-item-title class="text-capitalize">
+                                    {{ category.name }}
+                                </v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                    </v-menu>
+
+                    <v-btn
+                        height="100%"
+                        value="two"
+                        tag="a"
+                        class="pa-3"
+                        @click="navigationHelper.to('Home', { hash: '#topProducts' })"
+                    >
+                        Top Products </v-btn>
+
+                    <v-btn
+                        height="100%"
+                        value="two"
+                        tag="a"
+                        class="pa-3"
+                        @click="navigationHelper.to('Home', { hash: '#dailyDiscover' })"
+                    >
+                        Daily Discover
+                    </v-btn>
+                </v-sheet>
+            </div>
         </template>
     </v-app-bar>
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
+import { watch, onMounted } from 'vue'
 import { useHomeStore } from '@/modules/home/config/store';
 import { useCartStore } from '@/modules/cart/config/store';
 import { useAppStore } from '@/stores/app';
+import { useDisplay } from 'vuetify';
 import navigationHelper from '@/helpers/navigationHelper';
 
 defineProps({
@@ -133,8 +157,13 @@ defineProps({
 const homeStore = useHomeStore()
 const cartStore = useCartStore()
 const appStore = useAppStore()
+const displayStore = useDisplay()
+
+const { xs, width } = displayStore
 
 const isCategoryPage = computed(() => navigationHelper.getCurrentRouteName() === 'Category')
+
+const showExtensionMenu = ref(true)
 
 const searchItem = ref("")
 const onSearch = async () => {
@@ -144,6 +173,10 @@ const onSearch = async () => {
 
     navigationHelper.to('search', { query: { title: searchItem.value } })
 }
+
+watch(xs, () => {
+    showExtensionMenu.value = !xs.value
+})
 
 onMounted(() => {
     homeStore.loadAllCategories()

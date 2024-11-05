@@ -4,7 +4,7 @@
         v-if="productStore.loading"
         fluid
     >
-        <v-sheet height="700">
+        <v-sheet height="auto">
             <v-row justify="center">
                 <v-skeleton-loader
                     type="heading"
@@ -14,8 +14,8 @@
 
             <v-row justify="center">
                 <v-col
-                    cols="1"
-                    class="d-flex flex-column ga-3"
+                    cols="3"
+                    md="1"
                 >
                     <v-skeleton-loader
                         type="image"
@@ -24,10 +24,16 @@
                         :key="i"
                     ></v-skeleton-loader>
                 </v-col>
-                <v-col cols="4">
+                <v-col
+                    cols="12"
+                    md="4"
+                >
                     <v-skeleton-loader type="image@4"></v-skeleton-loader>
                 </v-col>
-                <v-col cols="4">
+                <v-col
+                    cols="12"
+                    md="4"
+                >
                     <v-skeleton-loader
                         type="heading"
                         width="100"

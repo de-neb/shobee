@@ -10,7 +10,10 @@
         class="cart-drawer"
     >
 
-        <v-container class="h-100">
+        <v-container
+            fluid
+            class="h-100"
+        >
             <v-row class="flex-column h-100">
                 <v-col class="flex-grow-0 d-flex flex-nowrap justify-space-between align-center">
 
@@ -121,7 +124,7 @@
                         <v-btn
                             block
                             size="x-large"
-                            variant="tonal"
+                            variant="text"
                             color="secondary"
                             @click="navigationHelper.to('cart')"
                         >

@@ -1,7 +1,9 @@
 <template>
     <v-navigation-drawer
-        permanent
         class="px-3 py-5"
+        :permanent="!xs"
+        :temporary="xs"
+        v-model="appStore.isFilterSidePanelOpen"
     >
         <v-list
             nav
@@ -59,9 +61,13 @@ import router from '@/router'
 import helper from '../config/helper';
 import { useHomeStore } from '@/modules/home/config/store';
 import { useProductStore } from '@/modules/products/config/store';
+import { useDisplay } from 'vuetify';
+import { useAppStore } from '@/stores/app';
 
 const homeStore = useHomeStore()
 const productStore = useProductStore()
+const { xs } = useDisplay()
+const appStore = useAppStore()
 
 const opened = ref(['Category', 'Price'])
 const currentCategory = ref<any[]>([])
