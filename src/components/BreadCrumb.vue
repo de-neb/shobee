@@ -24,7 +24,6 @@ import router from '@/router'
 
 const breadCrumbs = computed(() => {
     const currentRoute = router.currentRoute.value
-    console.log('current', currentRoute)
 
     if (typeof currentRoute.meta.breadCrumb === 'function') {
         return currentRoute.meta.breadCrumb(currentRoute.meta.productName)

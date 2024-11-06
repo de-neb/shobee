@@ -8,7 +8,6 @@ const router = createRouter({
         if (to.hash) {
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    console.log("scroll to hash ba");
                     resolve({
                         el: to.hash,
                         behavior: "smooth",
