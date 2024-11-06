@@ -79,6 +79,7 @@
                                 :key="category.id"
                                 :value="category.id"
                                 :to="`/category/${category.id}`"
+                                @click="appStore.isMenuSidePanelOpen = false"
                             >
                                 <v-list-item-title class="text-capitalize">
                                     {{ category.name }}
@@ -88,32 +89,34 @@
                     </v-menu>
                 </v-col>
 
-                <v-col cols="auto">
-                    <v-btn
-                        block
-                        height="100%"
-                        value="two"
-                        tag="a"
-                        variant="tonal"
-                        class="pa-3"
-                        @click="navigationHelper.to('Home', { hash: '#topProducts' })"
-                    >
-                        Top Products </v-btn>
-                </v-col>
+                <template v-if="isHomePage">
+                    <v-col cols="auto">
+                        <v-btn
+                            block
+                            height="100%"
+                            value="two"
+                            tag="a"
+                            variant="tonal"
+                            class="pa-3"
+                            @click="navigationHelper.to('Home', { hash: '#topProducts' })"
+                        >
+                            Top Products </v-btn>
+                    </v-col>
 
-                <v-col cols="auto">
-                    <v-btn
-                        block
-                        height="100%"
-                        value="two"
-                        tag="a"
-                        variant="tonal"
-                        class="pa-3"
-                        @click="navigationHelper.to('Home', { hash: '#dailyDiscover' })"
-                    >
-                        Daily Discover
-                    </v-btn>
-                </v-col>
+                    <v-col cols="auto">
+                        <v-btn
+                            block
+                            height="100%"
+                            value="two"
+                            tag="a"
+                            variant="tonal"
+                            class="pa-3"
+                            @click="navigationHelper.to('Home', { hash: '#dailyDiscover' })"
+                        >
+                            Daily Discover
+                        </v-btn>
+                    </v-col>
+                </template>
             </v-row>
 
             <v-spacer></v-spacer>
@@ -121,6 +124,7 @@
             <v-row
                 no-gutters
                 class="v-col-auto"
+                v-if="isCategoryPage"
             >
                 <v-col>
                     <v-btn
@@ -150,6 +154,9 @@ defineProps({
 
 const homeStore = useHomeStore()
 const appStore = useAppStore()
+
+const isCategoryPage = computed(() => navigationHelper.getCurrentRouteName() === 'Category')
+const isHomePage = computed(() => navigationHelper.getCurrentRouteName() === 'Home')
 
 const searchItem = ref("")
 const onSearch = async () => {

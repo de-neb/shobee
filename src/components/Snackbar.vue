@@ -2,7 +2,6 @@
     <v-snackbar-queue
         vertical
         closable
-        location="top right"
         timer="white"
         transition="slide-x-transition"
         theme="primary"
@@ -10,6 +9,7 @@
         v-model="snackbar.messages"
         :timeout="snackbar.duration"
         :color="snackbar.color"
+        :location="xs ? 'bottom' : 'top right'"
     >
 
 
@@ -18,8 +18,11 @@
 
 <script setup lang="ts">
 import { useSnackbarStore } from '@/stores/snackbar';
+import { useDisplay } from 'vuetify';
 
 const snackbar = useSnackbarStore()
+
+const { xs } = useDisplay()
 
 </script>
 

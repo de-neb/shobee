@@ -5,7 +5,7 @@ export const useAppStore = defineStore("app", {
     state: () => ({
         isCartSidePanelOpen: false,
         isMenuSidePanelOpen: false,
-        isFilterSidePanelOpen: false,
+        isFilterSidePanelOpen: true,
     }),
 
     actions: {

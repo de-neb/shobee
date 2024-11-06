@@ -9,6 +9,7 @@ export default [
                 component: () => import("@/modules/home/views/Home.vue"),
                 meta: {
                     breadCrumb: [{ text: "Home", disabled: true }],
+                    showFooter: true,
                 },
             },
         ],
@@ -37,6 +38,7 @@ export default [
                             },
                         ];
                     },
+                    showFooter: true,
                 },
             },
         ],
@@ -49,7 +51,9 @@ export default [
                 path: ":id",
                 name: "Category",
                 component: () => import("@/modules/filter/views/Filter.vue"),
-                meta: {},
+                meta: {
+                    showFooter: true,
+                },
             },
         ],
     },
@@ -61,6 +65,9 @@ export default [
                 path: "",
                 name: "Search",
                 component: () => import("@/modules/filter/views/Filter.vue"),
+                meta: {
+                    showFooter: true,
+                },
             },
         ],
     },
@@ -84,6 +91,7 @@ export default [
                             disabled: true,
                         },
                     ],
+                    showFooter: false,
                 },
             },
             {
@@ -107,6 +115,7 @@ export default [
                             disabled: true,
                         },
                     ],
+                    showFooter: false,
                 },
             },
             {

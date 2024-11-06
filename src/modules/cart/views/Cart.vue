@@ -1,13 +1,16 @@
 <template>
     <v-container class="h-100">
-        <v-row>
+        <v-row no-gutters>
             <BreadCrumb />
         </v-row>
 
-        <v-row v-if="cartStore.cart.length">
+        <v-row
+            no-gutters
+            v-if="cartStore.cart.length"
+        >
             <v-col
                 cols="12"
-                sm="8"
+                md="8"
             >
                 <v-list
                     density="compact"
@@ -63,30 +66,37 @@
                                 <v-checkbox-btn :model-value="isActive"></v-checkbox-btn>
                             </template>
 
-                            <v-row>
+                            <v-row class="flex-nowrap">
                                 <v-col cols="auto">
                                     <v-img
-                                        width="100"
-                                        aspect-ration="1/1"
+                                        min-width="100"
                                         cover
                                         class="rounded"
                                         :src="product.images[0]"
                                     ></v-img>
                                 </v-col>
 
-                                <v-col>
-                                    <v-list-item-title class="font-weight-medium">{{ product.title
+                                <v-col class="flex-grow-1">
+                                    <v-list-item-title class="font-weight-medium text-wrap">{{ product.title
                                         }}</v-list-item-title>
 
+                                    <p
+                                        class="text-h6"
+                                        v-if="xs"
+                                    >{{ miscHelper.formatPrice(product.price) }}</p>
+
                                     <QuantityInput
-                                        class="mt-9"
                                         v-model="product.quantity"
                                         width="120"
                                         density="compact"
+                                        :class="{ 'mt-9': !xs }"
                                     />
                                 </v-col>
 
-                                <v-col cols="auto">
+                                <v-col
+                                    cols="2"
+                                    v-if="!xs"
+                                >
                                     <p class="text-h6">{{ miscHelper.formatPrice(product.price) }}</p>
                                 </v-col>
                             </v-row>
@@ -99,7 +109,7 @@
 
             <v-col
                 cols="12"
-                sm="4"
+                md="4"
             >
 
                 <v-card variant="flat">
@@ -144,12 +154,15 @@
 </template>
 
 <script setup lang="ts">
-import miscHelper from '@/helpers/miscHelper';
 import { useCartStore } from '../config/store';
 import { useAppStore } from '@/stores/app';
+import { useDisplay } from 'vuetify';
+import miscHelper from '@/helpers/miscHelper';
+
 
 const cartStore = useCartStore()
 const appStore = useAppStore()
+const { xs } = useDisplay()
 
 const productIds = ref<number[]>([])
 

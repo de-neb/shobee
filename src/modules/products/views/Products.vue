@@ -14,8 +14,10 @@
 
             <v-row justify="center">
                 <v-col
-                    cols="3"
+                    cols="12"
+                    sm="5"
                     md="1"
+                    :class="{ 'd-flex ga-1': smAndDown }"
                 >
                     <v-skeleton-loader
                         type="image"
@@ -34,26 +36,11 @@
                     cols="12"
                     md="4"
                 >
-                    <v-skeleton-loader
-                        type="heading"
-                        width="100"
-                    ></v-skeleton-loader>
-                    <v-skeleton-loader
-                        type="heading"
-                        width="500"
-                    ></v-skeleton-loader>
-                    <v-skeleton-loader
-                        type="subtitle"
-                        width="100"
-                    ></v-skeleton-loader>
-                    <v-skeleton-loader
-                        type="text@10"
-                        width="500"
-                    ></v-skeleton-loader>
-                    <v-skeleton-loader
-                        type="button"
-                        width="500"
-                    ></v-skeleton-loader>
+                    <v-skeleton-loader type="heading"></v-skeleton-loader>
+                    <v-skeleton-loader type="heading"></v-skeleton-loader>
+                    <v-skeleton-loader type="subtitle"></v-skeleton-loader>
+                    <v-skeleton-loader type="text@10"></v-skeleton-loader>
+                    <v-skeleton-loader type="button"></v-skeleton-loader>
                 </v-col>
             </v-row>
         </v-sheet>
@@ -75,7 +62,7 @@
             <v-col
                 cols="12"
                 sm="auto"
-                :class="{ 'd-flex ga-2 justify-space-between': smAndDown }"
+                :class="{ 'd-flex ga-2 justify-center': smAndDown }"
             >
                 <v-card
                     hover
@@ -161,13 +148,20 @@
                     no-gutters
                     justify="space-between"
                     class="my-4"
+                    :class="{ 'ga-2': smAndDown }"
                 >
 
-                    <v-col cols="auto">
+                    <v-col
+                        cols="12"
+                        md="5"
+                    >
                         <QuantityInput v-model="productStore.viewingProduct.quantity" />
                     </v-col>
 
-                    <v-col cols="8">
+                    <v-col
+                        cols="12"
+                        md="6"
+                    >
                         <v-btn
                             block
                             variant="outlined"

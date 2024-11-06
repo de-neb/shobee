@@ -25,7 +25,7 @@
                                     <v-col
                                         v-for="field in ADDRESS_FIELDS"
                                         :key="field.key"
-                                        :cols="field.colWidth"
+                                        :cols="xs ? 12 : field.colWidth"
                                     >
                                         <v-autocomplete
                                             variant="outlined"
@@ -217,14 +217,16 @@
 
 <script setup lang="ts">
 import { ADDRESS_FIELDS, PAYMENT_OPTIONS, SHIPPING_OPTIONS } from '../config/constants'
+import { useCartStore } from '../config/store'
+import { useAppStore } from '@/stores/app.js'
+import { useDisplay } from 'vuetify'
 import rules from '@/shared/rules'
 import miscHelper from '@/helpers/miscHelper'
 import filter from '@/shared/filter'
-import { useCartStore } from '../config/store'
-import { useAppStore } from '@/stores/app.js'
 
 const cartStore = useCartStore()
 const appStore = useAppStore()
+const { xs } = useDisplay()
 
 const expanded = ref(['address'])
 const countries = ref<string[]>([])

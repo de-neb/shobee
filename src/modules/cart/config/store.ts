@@ -9,7 +9,7 @@ export const useCartStore = defineStore("cart", {
         cart: <Product[]>[],
         shippingInformation: {
             ...defaultAddress,
-            shippingMethod: <number | null>null,
+            shippingMethod: <number>0,
             paymentMethod: "",
         },
     }),
@@ -18,8 +18,7 @@ export const useCartStore = defineStore("cart", {
         subTotal(state) {
             const subTotal =
                 state.cart.reduce((acc, product) => {
-                    const productTotalPrice =
-                        parseFloat(product.price) * parseInt(product.quantity);
+                    const productTotalPrice = product.price * product.quantity!;
 
                     return acc + productTotalPrice;
                 }, 0) + state.shippingInformation.shippingMethod;
@@ -80,7 +79,7 @@ export const useCartStore = defineStore("cart", {
             );
 
             if (existingProductIndex > -1) {
-                this.cart[existingProductIndex].quantity += data.quantity;
+                this.cart[existingProductIndex].quantity += data.quantity!;
             } else {
                 this.cart.push(data);
             }

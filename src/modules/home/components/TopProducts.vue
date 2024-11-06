@@ -27,6 +27,8 @@
             align="center"
         >
             <v-col
+                cols="12"
+                sm="4"
                 lg="3"
                 alig-self="center"
                 v-for="product in topProducts"

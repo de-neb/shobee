@@ -8,10 +8,10 @@
       class="mx-auto"
     >
       <v-carousel
-        height="500"
-        show-arrows="hover"
         cycle
         hide-delimiter-background
+        show-arrows="hover"
+        :height="xs ? '' : 500"
       >
         <v-carousel-item
           position="relative"
@@ -24,17 +24,34 @@
               class="border-5"
               :src="miscHelper.getImageSrc(`${category.title}.jpeg`, 'banner')"
             >
-              <v-card-title class="mt-15 pt-15 ml-15">
-                <h1 class="text-white text-shadow text-h1 font-weight-black"> {{ category.title }}</h1>
+              <v-card-title class="d-flex flex-column ga-3 h-100 px-10">
+                <v-spacer></v-spacer>
+
+                <h1
+                  class="text-white text-h1 text-shadow font-weight-black"
+                  :class="{ 'text-h3': xs }"
+                > {{ category.title }}</h1>
                 <v-btn
-                  size="x-large"
-                  width="250"
                   variant="flat"
-                  color="primary"
-                  class="mt-10 text-h4 font-weight-black p-10"
+                  color="secondary"
+                  class="  font-weight-black p-10"
+                  :size="xs ? 'default' : 'x-large'"
+                  :width="xs ? 100 : 250"
                 >Shop
                   Now</v-btn>
+                <v-spacer v-if="!xs"></v-spacer>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
               </v-card-title>
+
+              <template #placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular
+                    color="grey-lighten-4"
+                    indeterminate
+                  ></v-progress-circular>
+                </div>
+              </template>
             </v-img>
           </v-card>
         </v-carousel-item>
@@ -50,10 +67,13 @@
 
 <script lang="ts" setup>
 import { useAppStore } from '@/stores/app';
-import miscHelper from '@/helpers/miscHelper'
 import { categories } from '@/categories';
+import { useDisplay } from 'vuetify';
+import miscHelper from '@/helpers/miscHelper'
 
 const app = useAppStore()
+
+const { xs } = useDisplay()
 </script>
 
 <style>

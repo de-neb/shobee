@@ -15,9 +15,9 @@
         ></v-btn>
 
         <v-img
+            contain
             max-width="180"
             class="cursor-pointer"
-            contain
             src="../assets/logo.png"
             @click="navigationHelper.to('home')"
         >
