@@ -164,6 +164,8 @@ const onSearch = async () => {
         return
     }
 
+    appStore.isMenuSidePanelOpen = false
+    appStore.isFilterSidePanelOpen = false
     navigationHelper.to('search', { query: { title: searchItem.value } })
 }
 
