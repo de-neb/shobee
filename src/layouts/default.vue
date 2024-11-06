@@ -33,7 +33,7 @@
                 > {{ category.title }}</h1>
                 <v-btn
                   variant="flat"
-                  color="secondary"
+                  color="primary"
                   class="  font-weight-black p-10"
                   :size="xs ? 'default' : 'x-large'"
                   :width="xs ? 100 : 250"
