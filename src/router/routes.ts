@@ -25,19 +25,17 @@ export default [
                 component: () =>
                     import("@/modules/products/views/Products.vue"),
                 meta: {
-                    breadCrumb: (name: string) => {
-                        return [
-                            {
-                                text: "Home",
-                                to: { name: "Home" },
-                                disabled: false,
-                            },
-                            {
-                                text: name,
-                                disabled: true,
-                            },
-                        ];
-                    },
+                    breadCrumb: [
+                        {
+                            text: "Home",
+                            to: { name: "Home" },
+                            disabled: false,
+                        },
+                        {
+                            text: "",
+                            disabled: true,
+                        },
+                    ],
                     showFooter: true,
                 },
             },

@@ -239,10 +239,9 @@ const buyNow = () => {
 }
 
 router.beforeEach(async (to, from) => {
-    if (to.name === 'Product') {
+    if (to.name === 'Product' && !to.meta?.productName) {
         const id = to.params.id
         await productStore.getProductById(id)
-        to.meta.productName = productStore.viewingProduct.title
     }
 })
 

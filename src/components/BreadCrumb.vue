@@ -1,7 +1,7 @@
 <template>
     <v-breadcrumbs
         active-color="primary"
-        :items="breadCrumbs"
+        :items="breadCrumb"
     >
         <template v-slot:divider>
             <v-icon icon="mdi-chevron-right"></v-icon>
@@ -20,15 +20,21 @@
 </template>
 
 <script setup lang="ts">
+import { useProductStore } from '@/modules/products/config/store';
 import router from '@/router'
 
-const breadCrumbs = computed(() => {
-    const currentRoute = router.currentRoute.value
+const productStore = useProductStore()
 
-    if (typeof currentRoute.meta.breadCrumb === 'function') {
-        return currentRoute.meta.breadCrumb(currentRoute.meta.productName)
+const breadCrumb = computed(() => {
+    const metaBreadCrumb = router.currentRoute.value.meta.breadCrumb
+
+    if (router.currentRoute.value.name === 'Product') {
+        metaBreadCrumb[1].text = productStore.viewingProduct.title
+
+        return metaBreadCrumb
     }
-    return currentRoute.meta.breadCrumb
+
+    return metaBreadCrumb
 })
 
 </script>
