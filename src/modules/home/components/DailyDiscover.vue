@@ -23,6 +23,8 @@
                 :key="product.id"
             >
                 <v-col
+                    cols="12"
+                    sm="4"
                     md="3"
                     xl="2"
                     alig-self="center"
