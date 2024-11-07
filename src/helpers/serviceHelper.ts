@@ -1,16 +1,15 @@
 import axios from "axios";
 
+// baseURL: "https://my.api.mockaroo.com/v1/",
 const instance = axios.create({
-    baseURL: "https://my.api.mockaroo.com/v1/",
+    baseURL: "https://api.escuelajs.co/api/v1/",
     timeout: 0,
 });
 
 instance.interceptors.request.use(
     function (config) {
+        // for mock api only
         config.headers["X-API-Key"] = "0ff33e30";
-
-        console.log("config", config);
-
         return config;
     },
     function (error) {
