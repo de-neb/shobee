@@ -15,14 +15,17 @@
       >
         <v-carousel-item
           position="relative"
-          v-for="category in categories"
+          v-for="category in homeStore.categories"
           :key="category.id"
         >
-          <v-card width="100%">
+          <v-card
+            width="100%"
+            height="100%"
+          >
             <v-img
               cover
               class="border-5"
-              :src="miscHelper.getImageSrc(`${category.title}.jpeg`, 'banner')"
+              :src="miscHelper.getImageSrc(`${category.name}.jpeg`, 'banner')"
             >
               <v-card-title class="d-flex flex-column ga-3 h-100 px-10">
                 <v-spacer></v-spacer>
@@ -30,7 +33,7 @@
                 <h1
                   class="text-white text-h1 text-shadow font-weight-black"
                   :class="{ 'text-h3': xs }"
-                > {{ category.title }}</h1>
+                > {{ category.name }}</h1>
                 <v-btn
                   variant="flat"
                   color="primary"
@@ -39,18 +42,17 @@
                   :width="xs ? 100 : 250"
                 >Shop
                   Now</v-btn>
-                <v-spacer v-if="!xs"></v-spacer>
-                <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
               </v-card-title>
 
-              <template #placeholder>
-                <div class="d-flex align-center justify-center fill-height">
-                  <v-progress-circular
-                    color="grey-lighten-4"
-                    indeterminate
-                  ></v-progress-circular>
-                </div>
+              <template #error>
+                <v-img
+                  cover
+                  class="blur"
+                  aspect-ration="1"
+                  src="@/assets/banner/placeholder-banner.jpg"
+                >
+                </v-img>
               </template>
             </v-img>
           </v-card>
@@ -66,12 +68,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/app';
-import { categories } from '@/categories';
+import { useHomeStore } from '@/modules/home/config/store';
 import { useDisplay } from 'vuetify';
 import miscHelper from '@/helpers/miscHelper'
 
-const app = useAppStore()
+const homeStore = useHomeStore()
 
 const { xs } = useDisplay()
 </script>
@@ -94,5 +95,9 @@ const { xs } = useDisplay()
 
 .text-shadow {
   text-shadow: 4px 4px #192039;
+}
+
+.blur {
+  filter: blur(5px)
 }
 </style>

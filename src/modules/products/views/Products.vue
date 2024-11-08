@@ -165,7 +165,7 @@
                         <v-btn
                             block
                             variant="outlined"
-                            color="secondary"
+                            color="primary"
                             height="48"
                             @click="addToCart"
                         > Add to Cart</v-btn>

@@ -13,6 +13,7 @@ declare module 'vue' {
     CartSidePanel: typeof import('./components/CartSidePanel.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     HomeCarousel: typeof import('./components/Home/HomeCarousel.vue')['default']
+    MenuSidePanel: typeof import('./components/MenuSidePanel.vue')['default']
     ProductCard: typeof import('./components/ProductCard.vue')['default']
     QuantityInput: typeof import('./components/QuantityInput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

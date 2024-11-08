@@ -1,5 +1,8 @@
 <template>
-    <v-container class="h-100">
+    <v-container
+        fluid
+        class="h-100"
+    >
         <v-row no-gutters>
             <BreadCrumb />
         </v-row>

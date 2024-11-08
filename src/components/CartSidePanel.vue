@@ -64,7 +64,7 @@
                                                         product.title }}</p>
                                                     <p class="font-weight-medium">{{ product.currency }} {{
                                                         product.price
-                                                    }}
+                                                        }}
                                                     </p>
                                                 </v-col>
 
@@ -125,7 +125,6 @@
                             block
                             size="x-large"
                             variant="text"
-                            color="secondary"
                             @click="navigationHelper.to('cart')"
                         >
                             View Cart

@@ -1,5 +1,8 @@
 <template>
-    <v-container class="h-100">
+    <v-container
+        fluid
+        class="h-100"
+    >
 
         <v-row>
             <BreadCrumb />
@@ -49,8 +52,12 @@
 
                                 <v-row>
                                     <v-spacer></v-spacer>
-                                    <v-col cols="auto">
+                                    <v-col
+                                        cols="12"
+                                        sm="auto"
+                                    >
                                         <v-btn
+                                            block
                                             variant="flat"
                                             color="primary"
                                             size="large"
@@ -241,6 +248,7 @@ const onProceed = async () => {
     }
 
     showShipping.value = true
+    expanded.value = ['shipping', 'payment']
 }
 
 onMounted(async () => {
@@ -250,7 +258,7 @@ onMounted(async () => {
 
 onUnmounted(() => {
     showShipping.value = false
-    cartStore.shippingInformation.shippingMethod = null
+    cartStore.shippingInformation.shippingMethod = 0
 })
 </script>
 
