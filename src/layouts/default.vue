@@ -40,6 +40,7 @@
                   class="  font-weight-black p-10"
                   :size="xs ? 'default' : 'x-large'"
                   :width="xs ? 100 : 250"
+                  :to="`/category/${category.id}`"
                 >Shop
                   Now</v-btn>
                 <v-spacer></v-spacer>
@@ -71,6 +72,7 @@
 import { useHomeStore } from '@/modules/home/config/store';
 import { useDisplay } from 'vuetify';
 import miscHelper from '@/helpers/miscHelper'
+import navigationHelper from '@/helpers/navigationHelper';
 
 const homeStore = useHomeStore()
 
