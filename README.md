@@ -7,7 +7,7 @@ Welcome to **Shobee**, a sample e-commerce site designed to showcase essential f
 
 ## 🛒 Project Overview
 
-Shobbee is a user-friendly e-commerce platform that allows users to browse through various products, add items to their cart, and simulate the online shopping process. This project leverages a third-party API for product data, providing a realistic context for product listings, categories, and cart management. Please note that the API data may change or be temporarily unavailable, which could affect the functionality of certain features.
+Shobeee is a user-friendly e-commerce platform that allows users to browse through various products, add items to their cart, and simulate the online shopping process. This project leverages a third-party API for product data, providing a realistic context for product listings, categories, and cart management. Please note that the API data may change or be temporarily unavailable, which could affect the functionality of certain features.
 
 ## 📋 Features
 
@@ -25,11 +25,11 @@ Shobbee is a user-friendly e-commerce platform that allows users to browse throu
 
 ## ⚠️ Important Note
 
-Shobbee relies on the [Platzi Fake API](https://fakeapi.platzi.com/en/rest/swagger/), an open REST API that provides sample e-commerce data. Since the API's data may be modified, it could result in unexpected behavior or errors. For example, product categories or IDs may change, which could break certain features.
+Shobeee relies on the [Platzi Fake API](https://fakeapi.platzi.com/en/rest/swagger/), an open REST API that provides sample e-commerce data. Since the API's data may be modified, it could result in unexpected behavior or errors. For example, product categories or IDs may change, which could break certain features.
 
 ## 🚀 Getting Started
 
-To run **Shobbee** locally, follow these steps:
+To run **Shobeee** locally, follow these steps:
 
 ### Prerequisites
 
@@ -40,8 +40,8 @@ To run **Shobbee** locally, follow these steps:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/shobbee.git
-   cd shobbee
+   git clone https://github.com/your-username/Shobeee.git
+   cd Shobeee
 2. **Install Dependencies**
    ```bash
    npm install
@@ -60,7 +60,7 @@ Once you’re on the homepage, you can:
 
 ## 📚 API Reference
 
-Shobbee uses the **[Platzi Fake API](https://fakeapi.platzi.com/en/rest/swagger/)** for product data. Endpoints include:
+Shobeee uses the **[Platzi Fake API](https://fakeapi.platzi.com/en/rest/swagger/)** for product data. Endpoints include:
 - **Products**: `/products`
 - **Categories**: `/categories`
 
