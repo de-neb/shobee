@@ -25,7 +25,7 @@
             <v-img
               cover
               class="border-5"
-              :src="miscHelper.getImageSrc(`${category.name}.jpeg`, 'banner')"
+              :src="miscHelper.getImageSrc(`${category.id}.jpeg`, 'banner')"
             >
               <v-card-title class="d-flex flex-column ga-3 h-100 px-10">
                 <v-spacer></v-spacer>
