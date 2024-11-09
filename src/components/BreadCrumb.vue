@@ -26,12 +26,10 @@ import router from '@/router'
 const productStore = useProductStore()
 
 const breadCrumb = computed(() => {
-    const metaBreadCrumb = router.currentRoute.value.meta.breadCrumb
+    const metaBreadCrumb: any = router.currentRoute.value.meta.breadCrumb
 
     if (router.currentRoute.value.name === 'Product') {
         metaBreadCrumb[1].text = productStore.viewingProduct.title
-
-        return metaBreadCrumb
     }
 
     return metaBreadCrumb

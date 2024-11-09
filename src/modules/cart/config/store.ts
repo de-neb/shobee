@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
 import { CART_STORAGE_KEY, defaultAddress } from "./constants";
 import { useSnackbarStore as snackbarStore } from "@/stores/snackbar";
+import { Product, ShippingInformation } from "@/shared/types";
 import miscHelper from "@/helpers/miscHelper";
-import { Product } from "@/shared/types";
 
 export const useCartStore = defineStore("cart", {
     state: () => ({
         cart: <Product[]>[],
-        shippingInformation: {
+        shippingInformation: <ShippingInformation>{
             ...defaultAddress,
             shippingMethod: <number>0,
             paymentMethod: "",
@@ -15,7 +15,7 @@ export const useCartStore = defineStore("cart", {
     }),
 
     getters: {
-        subTotal(state) {
+        subTotal(state): string | undefined {
             const subTotal =
                 state.cart.reduce((acc, product) => {
                     const productTotalPrice = product.price * product.quantity!;
@@ -26,14 +26,14 @@ export const useCartStore = defineStore("cart", {
             return miscHelper.formatPrice(subTotal);
         },
 
-        cartItemsTotal(state) {
+        cartItemsTotal(state): number {
             return state.cart.reduce(
                 (acc, product) => acc + product.quantity!,
                 0
             );
         },
 
-        cartCharges(state) {
+        cartCharges(state): any {
             const data = {
                 Subtotal: this.subTotal,
                 "Delivery Charges": state.shippingInformation.shippingMethod,
@@ -62,7 +62,7 @@ export const useCartStore = defineStore("cart", {
                 );
 
                 if (existingProductIndex > -1) {
-                    this.cart[existingProductIndex].quantity += 1;
+                    this.cart[existingProductIndex].quantity! += 1;
                 } else {
                     this.cart.push(data);
                 }
@@ -79,7 +79,7 @@ export const useCartStore = defineStore("cart", {
             );
 
             if (existingProductIndex > -1) {
-                this.cart[existingProductIndex].quantity += data.quantity!;
+                this.cart[existingProductIndex].quantity! += data.quantity!;
             } else {
                 this.cart.push(data);
             }
@@ -95,7 +95,7 @@ export const useCartStore = defineStore("cart", {
             );
         },
 
-        removeProduct(id: string | number) {
+        removeProduct(id: string) {
             this.cart = this.cart.filter((product) => product.id !== id);
 
             this.setCartInLocalStorage();
@@ -103,7 +103,7 @@ export const useCartStore = defineStore("cart", {
             snackbarStore().show("Item removed successfully.");
         },
 
-        removeMultipleProducts(productIds: number[]) {
+        removeMultipleProducts(productIds: string[]) {
             this.cart = this.cart.filter(
                 (product) => !productIds.includes(product.id)
             );

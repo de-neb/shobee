@@ -25,7 +25,10 @@ export default {
                 }
 
                 if (type === "date") {
-                    return new Date(compareA) - new Date(compareB);
+                    return (
+                        new Date(compareA).getTime() -
+                        new Date(compareB).getTime()
+                    );
                 }
 
                 if (type === "string") {

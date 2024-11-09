@@ -33,7 +33,7 @@
                                         <v-autocomplete
                                             variant="outlined"
                                             v-if="field.type === 'dropdown'"
-                                            v-model="cartStore.shippingInformation[field.key]"
+                                            v-model="cartStore.shippingInformation[field.key as keyof ShippingInformation]"
                                             :items="countries"
                                             :label="field.label"
                                             :rules="field.rules"
@@ -42,7 +42,7 @@
                                         <v-text-field
                                             variant="outlined"
                                             v-else
-                                            v-model="cartStore.shippingInformation[field.key]"
+                                            v-model="cartStore.shippingInformation[field.key as keyof ShippingInformation]"
                                             :label="field.label"
                                             :rules="field.rules"
                                             @keypress="field.type === 'number' ? rules.isNumber($event) : null"
@@ -230,6 +230,7 @@ import { useDisplay } from 'vuetify'
 import rules from '@/shared/rules'
 import miscHelper from '@/helpers/miscHelper'
 import filter from '@/shared/filter'
+import { ShippingInformation } from '@/shared/types'
 
 const cartStore = useCartStore()
 const appStore = useAppStore()

@@ -3,7 +3,7 @@ export default {
         return new URL(url, import.meta.url).href;
     },
 
-    getImageSrc(name: string, folder: string) {
+    getImageSrc(name: string, folder?: string) {
         try {
             if (folder) {
                 return this.generateImgUrl(`/src/assets/${folder}/${name}`);

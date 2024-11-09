@@ -162,12 +162,11 @@ import { useAppStore } from '@/stores/app';
 import { useDisplay } from 'vuetify';
 import miscHelper from '@/helpers/miscHelper';
 
-
 const cartStore = useCartStore()
 const appStore = useAppStore()
 const { xs } = useDisplay()
 
-const productIds = ref<number[]>([])
+const productIds = ref<string[]>([])
 
 const handleSelectAll = (value: boolean) => {
     if (value) {

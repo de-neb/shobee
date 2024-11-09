@@ -1,5 +1,5 @@
 export interface Category {
-    id: number;
+    id: string;
     name: string;
     image: string;
     creationAt: string;
@@ -7,7 +7,7 @@ export interface Category {
 }
 
 export interface Product {
-    id: number;
+    id: string;
     title: string;
     price: number;
     description: string;
@@ -16,4 +16,19 @@ export interface Product {
     updatedAt: string;
     category: Category;
     quantity?: number;
+    currency?: string;
+}
+
+export interface ShippingInformation {
+    firstName: string;
+    lasttName: string;
+    email: string;
+    streetAddress: string;
+    country: string;
+    state: string;
+    city: string;
+    postcode: string;
+    telephone: string;
+    shippingMethod: number;
+    paymentMethod: string;
 }

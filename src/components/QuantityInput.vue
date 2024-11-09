@@ -72,8 +72,8 @@ watch(quantity, (value: number) => {
     emit('update:modelValue', value)
 })
 
-watch(() => props.modelValue, (value: number) => {
-    quantity.value = value
+watch(() => props.modelValue, (value) => {
+    quantity.value = value as number
 })
 
 onMounted(() => {

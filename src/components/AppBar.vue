@@ -159,7 +159,7 @@ const cartStore = useCartStore()
 const appStore = useAppStore()
 const displayStore = useDisplay()
 
-const { xs, width } = displayStore
+const { xs } = displayStore
 
 const isCategoryPage = computed(() => navigationHelper.getCurrentRouteName() === 'Category')
 

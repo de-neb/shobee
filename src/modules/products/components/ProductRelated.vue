@@ -90,7 +90,7 @@ import { useDisplay } from 'vuetify';
 import ProductCard from '@/modules/home/components/ProductCard.vue'
 
 const props = defineProps({
-    categoryId: Number
+    categoryId: String
 })
 
 const productStore = useProductStore()
@@ -104,7 +104,7 @@ const itemsPerPage = computed(() => lgAndUp && relatedProducts.value.length > 6 
 
 const initRelatedProducts = async () => {
     isLoading.value = true
-    relatedProducts.value = await productStore.filterProducts(props.categoryId)
+    relatedProducts.value = await productStore.filterProducts(props.categoryId!)
     isLoading.value = false
 }
 

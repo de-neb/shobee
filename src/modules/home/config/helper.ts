@@ -1,7 +1,7 @@
 import defaultImage from "@/assets/placeholder.jpeg";
 
 export default {
-    getImageUrl(images: string[]) {
+    getImageUrl(images: string) {
         //images are sometimes returned as JSON
         try {
             const extracted = JSON.parse(images);

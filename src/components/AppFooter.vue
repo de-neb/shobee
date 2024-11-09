@@ -31,7 +31,7 @@
         >
           <h5
             v-for="link in links.slice(0, 5)"
-            :key="link"
+            :key="'link-' + link.title"
           >{{ link.title }}</h5>
 
         </v-col>
@@ -43,7 +43,7 @@
         >
           <h5
             v-for="link in links.slice(5, links.length)"
-            :key="link"
+            :key="'other-link-' + link.title"
           >{{ link.title }}</h5>
 
         </v-col>

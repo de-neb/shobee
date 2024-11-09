@@ -91,15 +91,12 @@
 <script setup lang="ts">
 import { FILTER_OPTIONS } from '../config/constants';
 import { useProductStore } from '@/modules/products/config/store';
-import { useDisplay } from 'vuetify';
+import { Product } from '@/shared/types';
 import helper from '../config/helper';
 import router from '@/router'
 import ProductCard from '@/modules/home/components/ProductCard.vue';
-import { Product } from '@/shared/types';
 
 const productStore = useProductStore()
-
-const { xs, mdAndDown } = useDisplay()
 
 const filterBy = ref(FILTER_OPTIONS[0])
 
@@ -130,11 +127,11 @@ const handleFilter = (value: string) => {
     isLoading.value = true
     const [{ sortBy, sortByProp, type }] = FILTER_OPTIONS.filter((el: any) => el.value === value)
 
-    categoryProducts.value = helper.sortItems(categoryProducts.value, sortBy, sortByProp, type)
+    categoryProducts.value = helper.sortItems(categoryProducts.value, sortBy as any, sortByProp, type)
     isLoading.value = false
 }
 
-router.afterEach((to) => {
+router.afterEach(() => {
     handleOnMounted()
 })
 

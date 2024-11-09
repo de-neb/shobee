@@ -22,7 +22,7 @@
                     <v-skeleton-loader
                         type="image"
                         width="100%"
-                        v-for="(item, i) in 3"
+                        v-for="i in 3"
                         :key="i"
                     ></v-skeleton-loader>
                 </v-col>
@@ -220,7 +220,7 @@ const activePreviewImageIndex = ref(0)
 const categoryId = computed(() => productStore.viewingProduct?.category?.id)
 
 const initProduct = async () => {
-    const id = router.currentRoute.value.params.id
+    const id = router.currentRoute.value.params.id as string
     await productStore.getProductById(id)
 }
 
@@ -240,7 +240,7 @@ const buyNow = () => {
 
 router.beforeEach(async (to, from) => {
     if (to.name === 'Product' && !to.meta?.productName) {
-        const id = to.params.id
+        const id = to.params.id as string
         await productStore.getProductById(id)
     }
 })

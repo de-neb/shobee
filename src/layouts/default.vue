@@ -72,7 +72,6 @@
 import { useHomeStore } from '@/modules/home/config/store';
 import { useDisplay } from 'vuetify';
 import miscHelper from '@/helpers/miscHelper'
-import navigationHelper from '@/helpers/navigationHelper';
 
 const homeStore = useHomeStore()
 

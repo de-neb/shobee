@@ -120,7 +120,13 @@ export default [
                 path: "success",
                 name: "Success",
                 component: () => import("@/modules/cart/views/Success.vue"),
-                //todo: add route guard for success
+                beforeEnter: (to: any, from: any, next: any) => {
+                    if (from.name === "Checkout") {
+                        next();
+                    } else {
+                        next({ name: "Home" });
+                    }
+                },
             },
         ],
     },

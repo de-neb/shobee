@@ -34,7 +34,7 @@
 
     <v-hover
         v-else
-        v-slot="{ isHovering, props }"
+        v-slot="{ props }"
     >
         <!-- vertical -->
         <v-card
@@ -137,12 +137,27 @@
 </template>
 
 <script setup lang="ts">
+import { useCartStore } from '@/modules/cart/config/store';
+import { Product } from '@/shared/types';
 import router from '@/router'
 import miscHelper from '@/helpers/miscHelper';
-import { useCartStore } from '@/modules/cart/config/store';
 
 const props = defineProps({
-    product: Object,
+    product: {
+        type: Object,
+        default: () => ({
+            id: "",
+            title: "",
+            price: "",
+            description: "",
+            images: [""],
+            creationAt: "",
+            updatedAt: "",
+            category: "",
+            quantity: "",
+            currency: "",
+        })
+    },
     loading: {
         type: Boolean,
         default: true
@@ -158,7 +173,7 @@ const show = ref(false)
 const cartStore = useCartStore()
 
 const addToCart = () => {
-    cartStore.updateCartInLocalStorage({ ...props.product, quantity: 1 })
+    cartStore.updateCartInLocalStorage({ ...props.product as Product, quantity: 1 })
 }
 
 const navigateToProduct = (id: number) => {

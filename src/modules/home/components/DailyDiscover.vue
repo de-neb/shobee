@@ -19,7 +19,7 @@
             align="center"
         >
             <template
-                v-for="(product, index) in infiniteProducts"
+                v-for="product in infiniteProducts"
                 :key="product.id"
             >
                 <v-col
