@@ -40,8 +40,8 @@ To run **Shobeee** locally, follow these steps:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/Shobeee.git
-   cd Shobeee
+   git clone https://github.com/de-neb/shobee.git
+   cd shobee
 2. **Install Dependencies**
    ```bash
    npm install
