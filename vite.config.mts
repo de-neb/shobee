@@ -63,6 +63,9 @@ export default defineConfig({
     },
     extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
+  build: {
+    assetsDir: "assets", // defaults to 'assets', so you may not need to change this
+  },
   server: {
     port: 3000,
   },

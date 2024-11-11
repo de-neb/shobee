@@ -150,8 +150,11 @@
         <v-empty-state
             v-else
             title="You don’t have a product in your cart."
-            image="/src/assets/empty-bag.png"
-        ></v-empty-state>
+        >
+            <template #media>
+                <v-img src="@/assets/empty-bag.png"></v-img>
+            </template>
+        </v-empty-state>
     </v-container>
 
 </template>
