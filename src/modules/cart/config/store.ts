@@ -53,6 +53,7 @@ export const useCartStore = defineStore("cart", {
             this.getCartFromLocalStorage();
 
             if (!this.cart || !this.cart.length) {
+                this.cart = [];
                 data.quantity = 1;
                 this.cart.push(data);
             } else {
