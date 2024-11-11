@@ -1,81 +1,72 @@
-# Vuetify (Default)
+# Shobee
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+Welcome to **Shobee**, a sample e-commerce site designed to showcase essential features for an online shopping experience. This project is built to demonstrate my skills in frontend development, e-commerce structure, and API integration. 
 
-## ❗️ Important Links
+### 🌐 Live Demo
+[Shobee Demo Link](#)
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+## 🛒 Project Overview
 
-## 💿 Install
+Shobeee is a user-friendly e-commerce platform that allows users to browse through various products, add items to their cart, and simulate the online shopping process. This project leverages a third-party API for product data, providing a realistic context for product listings, categories, and cart management. Please note that the API data may change or be temporarily unavailable, which could affect the functionality of certain features.
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+## 📋 Features
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+- **Product Browsing**: View a range of products with details like title, description, price, and category.
+- **Shopping Cart**: Add, remove, and view products in a cart with real-time updates.
+- **Responsive Design**: Fully optimized for desktop and mobile viewing.
+- **API Integration**: Uses a REST API for product data, which dynamically populates the site’s content.
 
-After completing the installation, your environment is ready for Vuetify development.
+## 🛠️ Tech Stack
 
-## ✨ Features
+- **Frontend**: Vue.js, Vuetify (UI Library)
+- **Routing**: Vue Router for seamless navigation between pages
+- **State Management**: Pinia for reactive, modular state management
+- **API**: [Platzi Fake API](https://fakeapi.platzi.com/en/rest/swagger/) for realistic product data
 
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- 💻 **Enhanced Development Experience**: Benefit from TypeScript's static type checking and the ESLint plugin suite for Vue, ensuring code quality and consistency. [TypeScript](https://www.typescriptlang.org/) | [ESLint Plugin Vue](https://eslint.vuejs.org/)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
-- 🛠️ **Strongly-Typed Vue**: Use vue-tsc for type-checking your Vue components, and enjoy a robust development experience. [vue-tsc](https://github.com/johnsoncodehk/volar/tree/master/packages/vue-tsc)
+## ⚠️ Important Note
 
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
+Shobeee relies on the [Platzi Fake API](https://fakeapi.platzi.com/en/rest/swagger/), an open REST API that provides sample e-commerce data. Since the API's data may be modified, it could result in unexpected behavior or errors. For example, product categories or IDs may change, which could break certain features.
 
-## 💡 Usage
+## 🚀 Getting Started
 
-This section covers how to start the development server and build your project for production.
+To run **Shobeee** locally, follow these steps:
 
-### Starting the Development Server
+### Prerequisites
 
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
+- **Node.js**: Make sure you have Node.js installed (version 14.x or later is recommended).
+- **Git**: You’ll need Git to clone the repository.
 
-```bash
-yarn dev
-```
+### Installation and Running the Application
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/de-neb/shobee.git
+   cd shobee
+2. **Install Dependencies**
+   ```bash
+   npm install
+3. **Run the Application**
+   ```bash
+   npm run dev
 
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
+4. **Open your browser and go to http://localhost:3000 to see the app in action.**
 
-### Building for Production
+### Usage
 
-To build your project for production, use:
+Once you’re on the homepage, you can:
+- Browse and search for products.
+- View product details by clicking on each item.
+- Add products to your shopping cart and view the cart for a summary of your selected items.
 
-```bash
-yarn build
-```
+## 📚 API Reference
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+Shobeee uses the **[Platzi Fake API](https://fakeapi.platzi.com/en/rest/swagger/)** for product data. Endpoints include:
+- **Products**: `/products`
+- **Categories**: `/categories`
 
-Once the build process is completed, your application will be ready for deployment in a production environment.
+Visit the [API documentation](https://fakeapi.platzi.com/en/rest/swagger/) for more details on how the data is structured.
 
-## 💪 Support Vuetify Development
+### 🙏 Acknowledgments
 
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
+This project is inspired by the need for a hands-on demonstration of e-commerce functionalities in frontend development. Special thanks to Platzi for their free API service, which made this project possible.
 
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
-
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
-
-Copyright (c) 2016-present Vuetify, LLC
