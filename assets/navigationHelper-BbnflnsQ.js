@@ -1,1 +1,0 @@
-import{I as e}from"./index-I3Ivw82e.js";import{f as o}from"./filter-Ca5qHN1U.js";const n={isCurrentRouteCategory:e.currentRoute.value.name=="Category",getCurrentRouteName(){return e.currentRoute.value.name},to(t,r={}){e.push({name:o.titleCase(t),...r})}};export{n};
