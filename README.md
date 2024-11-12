@@ -3,7 +3,7 @@
 Welcome to **Shobee**, a sample e-commerce site designed to showcase essential features for an online shopping experience. This project is built to demonstrate my skills in frontend development, e-commerce structure, and API integration. 
 
 ### 🌐 Live Demo
-[Shobee Demo Link](#)
+[Shobee Demo Link](https://de-neb.github.io/shobee/)
 
 ## 🛒 Project Overview
 
