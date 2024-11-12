@@ -1,4 +1,4 @@
-import defaultImage from "@/assets/placeholder.jpeg";
+import defaultImage from "/placeholder.jpeg";
 
 export default {
     getImageUrl(images: string) {
