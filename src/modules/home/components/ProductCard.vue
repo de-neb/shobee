@@ -62,7 +62,7 @@
             </v-img>
 
             <v-card-text class="rounded-lg">
-                <h4 class="text-truncate">{{ product.title }}</h4>
+                <h4 class="text-truncate font-weight-light">{{ product.title }}</h4>
                 <h6 class="text-subtitle text-grey">{{ product.category.name }}</h6>
                 <p class="font-weight-bold">{{ product.currency }} {{ product.price }}</p>
             </v-card-text>
