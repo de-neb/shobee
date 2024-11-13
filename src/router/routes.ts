@@ -89,7 +89,6 @@ export default [
                             disabled: true,
                         },
                     ],
-                    showFooter: false,
                 },
             },
             {
@@ -113,7 +112,6 @@ export default [
                             disabled: true,
                         },
                     ],
-                    showFooter: false,
                 },
             },
             {
@@ -129,6 +127,9 @@ export default [
                 },
             },
         ],
+        meta: {
+            showFooter: false,
+        },
     },
     {
         path: "/:pathMatch(.*)",

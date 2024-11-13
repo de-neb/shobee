@@ -24,7 +24,7 @@
                         :title="category.name"
                         :value="category.id"
                         :to="`/category/${category.id}`"
-                        color="secondary"
+                        color="primary"
                         variant="plain"
                     >
                     </v-list-item>

@@ -45,7 +45,7 @@
 
         <div class=" d-flex align-center">
 
-            <p class="font-weight-bold mx-2">{{ cartStore.subTotal }}</p>
+            <p class="font-weight-bold mx-2">${{ cartStore.subTotal }}</p>
 
             <v-btn
                 class="text-none"

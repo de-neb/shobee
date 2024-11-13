@@ -40,11 +40,14 @@
 </template>
 
 <script setup lang="ts">
+import { useCartStore } from "@/modules/cart/config/store";
 import { useProductStore } from "@/modules/products/config/store";
-import ProductCard from "./ProductCard.vue";
 import { Product } from "@/shared/types";
+import ProductCard from "./ProductCard.vue";
+
 
 const productStore = useProductStore();
+const cartStore = useCartStore()
 
 const infiniteProducts = ref<Product[]>([])
 const offset = ref(10)
@@ -71,6 +74,7 @@ onMounted(async () => {
         offset: offset.value,
         limit: 10
     })
+    cartStore.setCartInLocalStorage()
 });
 </script>
 

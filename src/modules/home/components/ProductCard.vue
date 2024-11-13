@@ -75,7 +75,7 @@
                             block
                             class="px-5"
                             variant="outlined"
-                            color="secondary"
+                            color="primary"
                             @click.stop="addToCart"
                         >Add to
                             Cart</v-btn>
@@ -125,7 +125,7 @@
                         size="large"
                         class="px-5"
                         variant="outlined"
-                        color="secondary"
+                        color="primary"
                         @click.stop="addToCart"
                     >Add to
                         Cart</v-btn>

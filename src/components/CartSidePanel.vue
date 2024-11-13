@@ -64,7 +64,7 @@
                                                         product.title }}</p>
                                                     <p class="font-weight-medium">{{ product.currency }} {{
                                                         product.price
-                                                    }}
+                                                        }}
                                                     </p>
                                                 </v-col>
 
@@ -106,7 +106,7 @@
                     <v-col class="flex-grow-0 d-flex justify-space-between align-center">
                         <span class="text-subtitle font-weight-medium">Subtotal</span>
 
-                        <span class="text-h4">{{ cartStore.subTotal }}</span>
+                        <span class="text-h4">${{ cartStore.subTotal }}</span>
                     </v-col>
 
                     <v-divider></v-divider>

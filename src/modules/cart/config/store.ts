@@ -15,7 +15,7 @@ export const useCartStore = defineStore("cart", {
     }),
 
     getters: {
-        subTotal(state): string | undefined {
+        subTotal(state): number {
             const subTotal =
                 state.cart.reduce((acc, product) => {
                     const productTotalPrice = product.price * product.quantity!;
@@ -23,7 +23,7 @@ export const useCartStore = defineStore("cart", {
                     return acc + productTotalPrice;
                 }, 0) + state.shippingInformation.shippingMethod;
 
-            return miscHelper.formatPrice(subTotal);
+            return subTotal;
         },
 
         cartItemsTotal(state): number {
@@ -35,9 +35,11 @@ export const useCartStore = defineStore("cart", {
 
         cartCharges(state): any {
             const data = {
-                Subtotal: this.subTotal,
+                Subtotal: miscHelper.formatPrice(this.subTotal),
                 "Delivery Charges": state.shippingInformation.shippingMethod,
-                "Grand Total": this.subTotal,
+                "Grand Total": miscHelper.formatPrice(
+                    this.subTotal + state.shippingInformation.shippingMethod
+                ),
             };
 
             return data;
@@ -115,6 +117,10 @@ export const useCartStore = defineStore("cart", {
         },
 
         clearCart() {
+            snackbarStore().show(
+                "Your order has been successfully placed!",
+                "success"
+            );
             this.cart = [];
             this.setCartInLocalStorage();
         },

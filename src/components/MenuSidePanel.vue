@@ -60,7 +60,11 @@
                 class="v-col-auto flex-column my-5 pa-0"
             >
                 <v-col cols="auto">
-                    <v-menu open-on-hover>
+                    <v-menu
+                        open-on-hover
+                        open-on-click
+                        eager
+                    >
                         <template #activator="{ props }">
                             <v-btn
                                 block
