@@ -1,44 +1,29 @@
 # Shobee
 
-A responsive e-commerce frontend built with Vue 3 and TypeScript. The project demonstrates component-based UI development, client-side routing, state management, REST API integration, and responsive behavior across desktop and mobile layouts.
+A sample e-commerce website built with Vue 3. It uses a third-party API for the product data and includes basic shopping features such as browsing products, viewing product details, and adding items to cart.
 
-## Live Demo
+[View Demo](https://de-neb.github.io/shobee/)
 
-https://de-neb.github.io/shobee/
+## About The Project
 
-## Highlights
+I made this project to practice building a larger frontend application using Vue 3. The app uses Pinia for state management, Vue Router for navigation, and Vuetify for the UI.
 
-- Browse products and categories from a third-party REST API
-- View product details and navigate between pages with Vue Router
-- Add and remove products from a shopping cart with reactive state updates
-- Manage shared application state with Pinia
-- Responsive layouts for desktop and mobile
-- Error and edge-case handling for changing external API data
+The product data comes from the Platzi Fake API, so some data may change or become unavailable depending on the API.
 
-## Tech Stack
+## Built With
 
 - Vue 3
 - TypeScript
 - Pinia
 - Vue Router
-- Vuetify 3
+- Vuetify
 - Axios
 - Vite
 - Sass
 
-## Running Locally
+## Project Setup
 
 ```bash
-git clone https://github.com/de-neb/shobee.git
-cd shobee
 npm install
 npm run dev
 ```
-
-## Build
-
-```bash
-npm run build
-```
-
-The application uses the Platzi Fake API for product and category data. Because the API is externally maintained, its available records may change over time.
