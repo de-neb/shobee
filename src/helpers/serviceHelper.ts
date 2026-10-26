@@ -1,21 +1,22 @@
 import axios from "axios";
 
-// baseURL: "https://my.api.mockaroo.com/v1/",
-const instance = axios.create({
-    baseURL: "https://api.escuelajs.co/api/v1/",
-    timeout: 0,
-});
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-instance.interceptors.request.use(
-    function (config) {
-        // for mock api only
-        config.headers["X-API-Key"] = "0ff33e30";
-        return config;
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.error(
+        "Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Copy .env.example to .env.local and fill them in."
+    );
+}
+
+const instance = axios.create({
+    baseURL: `${SUPABASE_URL}/rest/v1/`,
+    timeout: 0,
+    headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
     },
-    function (error) {
-        return Promise.reject(error);
-    }
-);
+});
 
 instance.interceptors.response.use(
     function (response) {

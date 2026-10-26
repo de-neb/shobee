@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { CART_STORAGE_KEY, defaultAddress } from "./constants";
+import { FALLBACK_COUNTRIES } from "./countries";
 import { useSnackbarStore as snackbarStore } from "@/stores/snackbar";
 import { Product, ShippingInformation } from "@/shared/types";
 import miscHelper from "@/helpers/miscHelper";
@@ -125,17 +126,23 @@ export const useCartStore = defineStore("cart", {
             this.setCartInLocalStorage();
         },
 
-        async getCountries() {
+        async getCountries(): Promise<string[]> {
             try {
                 const response = await fetch(
-                    "https://restcountries.com/v3.1/all"
+                    "https://restcountries.com/v3.1/all?fields=name"
                 );
+
+                if (!response.ok) {
+                    throw new Error(`Countries API responded with ${response.status}`);
+                }
 
                 const data = await response.json();
 
-                return data.map((country: any) => country.name.common);
+                return data
+                    .map((country: any) => country.name.common as string)
+                    .sort((a: string, b: string) => a.localeCompare(b));
             } catch (error) {
-                snackbarStore().show("Failed to fetch countries", "error");
+                return FALLBACK_COUNTRIES;
             }
         },
     },
